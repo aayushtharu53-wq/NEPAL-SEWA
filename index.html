@@ -3137,7 +3137,14 @@ renderNotices();
 initBSCalendar();
 loadSupabaseNotices();
 loadBipadDisasters();
-
+// Register Nepal Sewa PWA
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("Nepal Sewa App Ready!"))
+      .catch(error => console.log("Service Worker Error:", error));
+  });
+}
 </script>
 </body>
 </html>
