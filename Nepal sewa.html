@@ -1,0 +1,3141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepal Sewa</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f8;
+    color: #17305c;
+    padding-bottom: 80px;
+}
+
+header {
+    background: #173b82;
+    color: white;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffcf55;
+}
+
+.bell {
+    cursor: pointer;
+    font-size: 24px;
+    position: relative;
+}
+
+#counter {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    background: #ef4444;
+    border-radius: 50%;
+    font-size: 11px;
+    padding: 4px 6px;
+}
+
+.welcome {
+    background: linear-gradient(135deg, #173b82, #2865bc);
+    color: white;
+    padding: 25px 18px;
+    border-radius: 0 0 24px 24px;
+}
+
+.welcome p {
+    margin-top: 9px;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.district-box {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 13px;
+    background: white;
+    color: #17305c;
+}
+
+.district-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+select, input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d8e1ef;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 9px;
+    font-family: inherit;
+    background: white;
+}
+
+.container {
+    max-width: 760px;
+    margin: auto;
+    padding: 22px 15px;
+}
+
+.section-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.service {
+    background: white;
+    border-radius: 15px;
+    padding: 19px 4px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #e5eaf3;
+    transition: .2s;
+}
+
+.service:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 16px #16365b15;
+}
+
+.service .icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.service h3 {
+    font-size: 13px;
+}
+
+/* ALERT SCREEN */
+#alertsPage {
+    background: #eef2f8;
+    min-height: 80vh;
+}
+
+.alert-hero {
+    background: linear-gradient(140deg, #173b82, #254b95);
+    padding: 17px;
+    border-radius: 0 0 19px 19px;
+    color: white;
+}
+
+.back-btn {
+    background: #ffffff25;
+    color: white;
+    padding: 9px 12px;
+    border: 1px solid #ffffff55;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-bottom: 17px;
+    font-size: 14px;
+}
+
+.latest-box {
+    background: white;
+    color: #17305c;
+    border-radius: 13px;
+    padding: 15px;
+}
+
+.latest-box h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.latest-box p {
+    font-size: 13px;
+    color: #65748d;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 20px 0;
+}
+
+.filter-btn {
+    border: none;
+    border-radius: 30px;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #e2e9f4;
+    color: #24436f;
+}
+
+.filter-btn.active {
+    background: #173b82;
+    color: white;
+}
+
+.filter-btn.emergency {
+    background: #fde6e6;
+    color: #bb2929;
+}
+
+.filter-btn.weather {
+    background: #fff3c9;
+    color: #916500;
+}
+
+.filter-btn.notices {
+    background: #dceaff;
+    color: #174d9b;
+}
+
+.filter-btn.active {
+    background: #173b82;
+    color: white;
+}
+
+.alert-card {
+    background: white;
+    padding: 16px;
+    border-radius: 15px;
+    margin-bottom: 13px;
+    border: 1px solid #e5eaf3;
+    box-shadow: 0 3px 12px #142e5709;
+}
+
+.card-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.card-title {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+}
+
+.card-title h3 {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.card-icon {
+    font-size: 20px;
+}
+
+.priority {
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 5px 8px;
+    white-space: nowrap;
+    background: #e4edff;
+    color: #2454a1;
+}
+
+.priority.high {
+    background: #ffe1e1;
+    color: #c62828;
+}
+
+.priority.medium {
+    background: #fff0c5;
+    color: #906300;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: #7b879b;
+    margin: 7px 0 10px;
+}
+
+.card-message {
+    color: #25344e;
+    font-size: 13px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.card-date {
+    color: #8994a6;
+    font-size: 11px;
+    display: block;
+    margin-top: 13px;
+    border-top: 1px solid #edf0f5;
+    padding-top: 10px;
+}
+
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.small-btn {
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    background: #e6efff;
+    color: #174d9b;
+}
+
+.delete-btn {
+    background: #fff0f0;
+    color: #b91c1c;
+}
+
+.form-box {
+    background: white;
+    border: 1px solid #e0e8f4;
+    border-radius: 15px;
+    padding: 17px;
+    margin-bottom: 20px;
+}
+
+.form-box h3 {
+    margin-bottom: 8px;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 13px;
+    background: #173b82;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.empty {
+    background: white;
+    padding: 25px 15px;
+    border-radius: 14px;
+    text-align: center;
+    color: #728099;
+    line-height: 1.8;
+}
+
+.info-box {
+    margin-top: 25px;
+    padding: 18px;
+    background: #e1edff;
+    border-radius: 14px;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    box-shadow: 0 -3px 15px #00000010;
+    padding: 12px 3px;
+    z-index: 5;
+}
+
+.nav-item {
+    flex: 1;
+    text-align: center;
+    color: #8792a5;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.nav-item div {
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: #173b82;
+    font-weight: bold;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 360px) {
+    .filter-btn {
+        padding: 9px;
+        font-size: 11px;
+    }
+}
+
+.live-weather {
+  background: white;
+  padding: 17px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #dce5f2;
+  box-shadow: 0 3px 12px #142e5709;
+}
+.live-weather h3 {
+  margin-bottom: 12px;
+  color: #173b82;
+}
+.live-weather p {
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+.live-weather a {
+  display: inline-block;
+  margin-top: 9px;
+  color: #174d9b;
+  font-size: 13px;
+  font-weight: bold;
+}
+.live-weather .weather-note {
+  color: #916500;
+  background: #fff3c9;
+  padding: 9px;
+  border-radius: 8px;
+}
+.bs-calendar {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    margin-top: 15px;
+    color: #173b82;
+}
+
+.bs-month-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.bs-month-controls button,
+.bs-today-btn {
+    background: #173b82;
+    color: white;
+    border: none;
+    padding: 9px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.bs-weekdays,
+.bs-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 5px;
+    text-align: center;
+}
+
+.bs-weekdays {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.bs-day {
+    padding: 10px 0;
+    border-radius: 8px;
+    background: #f0f4ff;
+}
+
+.bs-day.today {
+    background: #173b82;
+    color: white;
+    font-weight: bold;
+}
+
+.bs-day.empty {
+    background: transparent;
+}
+
+.bs-date-info {
+    text-align: center;
+    margin-bottom: 12px;
+}
+/* Premium Blue Design */
+header {
+    background: linear-gradient(135deg, #102b5c, #2865bc);
+    color: white;
+    padding: 20px;
+    border-radius: 0 0 20px 20px;
+}
+
+button {
+    background: #173b82;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2865bc;
+}
+
+.service-card,
+.card,
+.notice-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(23, 59, 130, 0.12);
+}
+
+h1, h2, h3 {
+    color: #173b82;
+}
+/* Premium Service Cards */
+.service-card {
+    background: white;
+    border: 1px solid #dce6f5;
+    border-radius: 16px;
+    padding: 18px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(23, 59, 130, 0.15);
+}
+
+nav {
+    background: white;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.08);
+}
+
+input,
+select,
+textarea {
+    border: 1px solid #cbd8ec;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #2865bc;
+    box-shadow: 0 0 0 3px rgba(40, 101, 188, 0.12);
+}
+label[for="district"] {
+    display: block;
+    color: #173b82;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#district {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #17305c;
+    border: 1px solid #cbd8ec;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+}
+/* Live official alerts feed */
+.live-feed-status{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;color:#17613e;margin:10px 0 4px}
+.live-dot{width:9px;height:9px;border-radius:50%;background:#18a66a;box-shadow:0 0 0 5px #18a66a20;display:inline-block;animation:livePulse 1.8s infinite}
+@keyframes livePulse{50%{box-shadow:0 0 0 8px #18a66a08}}
+.official-live-card{border-left:4px solid #e2a52d}
+.official-alert-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.official-alert-top h3{font-size:15px;line-height:1.45;color:#18345e;flex:1}
+.official-badge{font-size:10px;font-weight:800;padding:5px 8px;border-radius:20px;background:#eaf1fb;color:#315d99;white-space:nowrap}
+.official-badge.verified{background:#e5f7ed;color:#147747}
+.official-alert-meta{display:grid;gap:5px;margin-top:12px;padding:10px;background:#f5f8fd;border-radius:11px;color:#53647d;font-size:12px}
+.official-alert-meta p{margin:0}
+.official-source-link{display:inline-block;margin-top:11px;color:#245ec3;font-size:12px;font-weight:800;text-decoration:none}
+.feed-empty{padding:16px;border:1px dashed #c8d5e8;background:#f7faff;border-radius:14px;color:#50617a;line-height:1.6}
+.feed-empty strong{display:block;color:#203b65;margin-bottom:5px}
+.feed-empty p{margin-top:5px}
+.feed-loading{padding:14px;color:#53647d}
+.feed-note{color:#9b6500;font-weight:700}
+
+/* Premium Alerts Heading */
+h2 {
+    color: #173b82;
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dce6f5;
+}
+
+/* ===== NEPAL SEWA PREMIUM VISUAL REFRESH ===== */
+:root {
+  --ns-navy: #102b5c;
+  --ns-blue: #1d4ed8;
+  --ns-blue-2: #3478f6;
+  --ns-gold: #f4c95d;
+  --ns-bg: #f4f7fc;
+  --ns-ink: #162746;
+  --ns-muted: #71809a;
+  --ns-line: #e4eaf4;
+  --ns-card: #ffffff;
+  --ns-shadow: 0 12px 30px rgba(20, 43, 85, .08);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at top right, rgba(69, 123, 255, .07), transparent 38%),
+    var(--ns-bg);
+  color: var(--ns-ink);
+  letter-spacing: .05px;
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 15px clamp(16px, 4vw, 28px);
+  background: rgba(13, 39, 86, .96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(10, 31, 70, .14);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 22px;
+  letter-spacing: -.55px;
+}
+.logo span { color: var(--ns-gold); }
+.bell {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.16);
+  transition: transform .2s, background .2s;
+}
+.bell:hover { transform: translateY(-2px); background: rgba(255,255,255,.2); }
+#counter { box-shadow: 0 0 0 3px #102b5c; }
+.welcome {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(27px, 5vw, 40px) clamp(18px, 4vw, 30px) 25px;
+  border-radius: 0 0 30px 30px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255,255,255,.18), transparent 30%),
+    linear-gradient(130deg, #102653 0%, #174a9d 56%, #2f76e8 100%);
+  box-shadow: 0 16px 35px rgba(20, 61, 130, .19);
+}
+.welcome::after {
+  content: "🇳🇵";
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  font-size: clamp(48px, 9vw, 78px);
+  opacity: .15;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+.welcome h1, .welcome h2 { position: relative; z-index: 1; max-width: 80%; line-height: 1.2; letter-spacing: -.7px; }
+.welcome p { position: relative; z-index: 1; max-width: 540px; color: rgba(255,255,255,.84); font-size: 14px; line-height: 1.75; }
+.district-box {
+  position: relative;
+  z-index: 2;
+  margin-top: 22px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.98);
+  border: 1px solid rgba(255,255,255,.65);
+  box-shadow: 0 10px 25px rgba(8, 28, 68, .16);
+}
+.district-box label { color: #253c63; font-size: 13px; }
+select, input, textarea {
+  border: 1px solid #dce4f1;
+  border-radius: 12px;
+  background-color: #fbfcff;
+  color: var(--ns-ink);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+select:focus, input:focus, textarea:focus {
+  border-color: #6796f4;
+  box-shadow: 0 0 0 4px rgba(52,120,246,.12);
+  background: #fff;
+}
+.container { max-width: 900px; padding: 26px clamp(14px, 3.5vw, 24px); }
+.section-title {
+  color: #15366f;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.45px;
+  margin-bottom: 17px;
+}
+.services { gap: 13px; }
+.service {
+  position: relative;
+  overflow: hidden;
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 17px 7px;
+  border-radius: 19px;
+  border: 1px solid rgba(220,229,243,.95);
+  background: linear-gradient(160deg, #fff, #fbfcff);
+  box-shadow: 0 5px 15px rgba(21,48,94,.035);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.service::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ns-blue), var(--ns-gold));
+  opacity: 0;
+  transition: opacity .2s;
+}
+.service:hover {
+  transform: translateY(-4px);
+  border-color: #c8d8f5;
+  box-shadow: 0 13px 25px rgba(21,58,125,.12);
+}
+.service:hover::before { opacity: 1; }
+.service .icon { font-size: 29px; filter: saturate(1.08); margin-bottom: 7px; }
+.service h3 { font-size: 13px; font-weight: 750; color: #1b3767; }
+#alertsPage { background: transparent; }
+.alert-hero {
+  padding: 20px clamp(16px, 4vw, 26px);
+  background: linear-gradient(135deg, #102653, #1f56ae 75%, #2c70dc);
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 12px 25px rgba(20,61,130,.14);
+}
+.back-btn { border-radius: 12px; transition: background .2s, transform .2s; }
+.back-btn:hover { background: #ffffff38; transform: translateY(-1px); }
+.latest-box, .alert-card, .form-box, .info-box, .live-weather, .bs-calendar, #bipadDisasters > div, #homeAlerts > div {
+  background: var(--ns-card);
+  border: 1px solid var(--ns-line);
+  border-radius: 19px;
+  box-shadow: var(--ns-shadow);
+}
+.latest-box { padding: 18px; }
+.filter-row { gap: 8px; }
+.filter-btn {
+  padding: 10px 14px;
+  border: 1px solid #e1e8f4;
+  background: #fff;
+  transition: transform .18s, box-shadow .18s, background .18s;
+}
+.filter-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 12px rgba(20,43,85,.08); }
+.filter-btn.active { background: linear-gradient(135deg, #173b82, #2d69d1); box-shadow: 0 5px 13px rgba(29,78,216,.2); }
+.alert-card { padding: 18px; margin-bottom: 14px; transition: transform .2s, box-shadow .2s; }
+.alert-card:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(20,43,85,.1); }
+.card-title h3 { color: #1b3158; }
+.priority { padding: 6px 10px; letter-spacing: .2px; }
+.card-date { border-top-color: #edf1f8; }
+.form-box, .info-box, .live-weather { padding: 18px; margin-top: 16px; }
+.form-box h3, .live-weather h3 { color: #173b82; margin-bottom: 8px; }
+.save-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #173b82, #2e6dd4);
+  font-weight: 750;
+  box-shadow: 0 7px 16px rgba(29,78,216,.18);
+  transition: transform .18s, box-shadow .18s, filter .18s;
+}
+.save-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(29,78,216,.25); filter: brightness(1.04); }
+.small-btn { border-radius: 10px; padding: 8px 11px; }
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: min(650px, calc(100% - 24px));
+  padding: 9px 8px calc(9px + env(safe-area-inset-bottom));
+  border: 1px solid rgba(219,228,242,.9);
+  border-radius: 23px;
+  background: rgba(255,255,255,.93);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 12px 35px rgba(13,39,86,.18);
+  z-index: 50;
+}
+.nav-item {
+  border-radius: 15px;
+  color: #75839c;
+  transition: color .2s, background .2s, transform .2s;
+}
+.nav-item.active {
+  color: #173b82;
+  background: #eaf1ff;
+}
+.nav-item.active div { font-weight: 800; }
+.nav-item:hover { transform: translateY(-1px); }
+.live-weather { background: linear-gradient(145deg, #fff, #f8fbff); }
+.live-weather a { color: #245ec3; font-weight: 700; }
+.weather-note { color: var(--ns-muted); line-height: 1.6; }
+.bs-calendar { padding: 16px; }
+.bs-month-controls { gap: 10px; }
+.bs-today-btn { border-radius: 10px; }
+.bs-weekdays { color: #536783; font-weight: 800; }
+.bs-days > * { border-radius: 11px; }
+.empty { padding: 24px 16px; border: 1px dashed #ccd8eb; border-radius: 16px; background: #fafcff; color: #6b7c97; }
+button { font-family: inherit; cursor: pointer; }
+button:focus-visible, .service:focus-visible, .nav-item:focus-visible { outline: 3px solid rgba(52,120,246,.45); outline-offset: 3px; }
+@media (max-width: 520px) {
+  header { padding: 13px 15px; }
+  .logo { font-size: 20px; }
+  .welcome { padding-top: 27px; }
+  .welcome h1, .welcome h2 { max-width: 82%; font-size: 25px; }
+  .services { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+  .service { min-height: 96px; padding: 14px 4px; border-radius: 16px; }
+  .service .icon { font-size: 25px; }
+  .service h3 { font-size: 12px; }
+  .section-title { font-size: 19px; }
+  .container { padding-top: 22px; }
+  .bottom-nav { bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+/* ===== END PREMIUM VISUAL REFRESH ===== */
+
+
+/* ===== PREMIUM DUAL-DATE BS CALENDAR ===== */
+.bs-calendar {
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid #e2e9f5;
+  background: linear-gradient(160deg,#fff 0%,#f9fbff 100%);
+  box-shadow: 0 18px 42px rgba(16,43,92,.10);
+}
+.bs-date-info {
+  padding: 15px 14px;
+  border-radius: 17px;
+  color: #fff;
+  background: linear-gradient(130deg,#102653,#245fc1);
+  font-weight: 750;
+  line-height: 1.7;
+  box-shadow: 0 9px 20px rgba(23,59,130,.17);
+}
+.bs-date-info small { display:block; color:#dce8ff; font-weight:500; }
+.bs-month-controls { margin: 18px 0 14px; }
+.bs-month-controls button, .bs-today-btn {
+  min-width: 42px;
+  border-radius: 12px;
+  background: #173b82;
+  box-shadow: 0 5px 12px rgba(23,59,130,.16);
+}
+.bs-month-controls button:hover, .bs-today-btn:hover { background:#2c65c4; }
+#bsMonthTitle { color:#183969; font-size:18px; letter-spacing:-.3px; }
+.bs-weekdays { gap:6px; color:#6d7d98; font-size:12px; margin-bottom:8px; }
+.bs-days { gap:7px; }
+.bs-day {
+  position:relative;
+  min-height:61px;
+  padding:8px 2px 6px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  border:1px solid #e7edf7;
+  border-radius:13px;
+  background:#fff;
+  color:#183969;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:800;
+  line-height:1.05;
+  transition:transform .16s, box-shadow .16s, border-color .16s;
+}
+.bs-day:hover:not(.empty) { transform:translateY(-2px); border-color:#9dbcf5; box-shadow:0 7px 14px rgba(25,66,135,.11); }
+.bs-day .ad-date { color:#8592a8; font-size:10px; font-weight:600; }
+.bs-day.today {
+  background:linear-gradient(145deg,#173b82,#3478e8);
+  border-color:#173b82;
+  color:#fff;
+  box-shadow:0 6px 15px rgba(23,59,130,.22);
+}
+.bs-day.today .ad-date { color:#e0eaff; }
+.bs-day.festival {
+  background:linear-gradient(150deg,#fff7df,#ffedb5);
+  border-color:#f0c34e;
+  color:#7b4a00;
+}
+.bs-day.festival .ad-date { color:#986819; }
+.bs-day.festival::after {
+  content:"";
+  width:5px;height:5px;border-radius:50%;
+  background:#e0a51b;
+  position:absolute;top:5px;right:5px;
+}
+.bs-day.today.festival {
+  background:linear-gradient(145deg,#173b82,#3478e8);
+  border-color:#f0c34e;
+  color:#fff;
+}
+.bs-day.today.festival .ad-date { color:#e0eaff; }
+.bs-day.empty { border:0; background:transparent; cursor:default; }
+.bs-legend { display:flex; gap:15px; flex-wrap:wrap; justify-content:center; margin:16px 0 10px; color:#667792; font-size:11px; }
+.bs-legend span { display:flex; align-items:center; gap:6px; }
+.legend-dot { display:inline-block; width:9px;height:9px;border-radius:50%; }
+.today-dot { background:#245fc1; }
+.festival-dot { background:#e0a51b; }
+.bs-festival-details {
+  min-height:44px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#f2f6ff;
+  border:1px solid #e0e9fa;
+  color:#445978;
+  font-size:12px;
+  line-height:1.55;
+}
+.bs-festival-details strong { color:#173b82; }
+@media(max-width:420px) {
+ .bs-calendar { padding:13px; }
+ .bs-days { gap:4px; }
+ .bs-day { min-height:54px; border-radius:10px; font-size:15px; }
+ .bs-day .ad-date { font-size:9px; }
+ .bs-weekdays { gap:4px; font-size:11px; }
+}
+
+/* ===== PREMIUM SERVICES PAGE ===== */
+.services-hero {
+    padding: 22px;
+    margin: 15px 0 20px;
+    color: white;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #102653, #2865bc, #3478f6);
+    box-shadow: 0 12px 28px #173b8225;
+}
+
+.services-hero h3 {
+    color: white;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.services-hero p {
+    color: #e3edff;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* ===== JOBS SECTION ===== */
+.jobs-hero { margin: 16px 0; padding: 20px; border-radius: 20px; color: #fff; background: linear-gradient(135deg,#173b82,#2865bc); }
+.jobs-hero h3 { margin-bottom: 8px; font-size: 19px; }
+.jobs-hero p { font-size: 13px; line-height: 1.6; opacity: .94; }
+.jobs-note { margin: 16px 0; padding: 12px 14px; border-radius: 13px; background: #fff8df; color: #765515; font-size: 12px; line-height: 1.6; }
+.jobs-category { display: inline-block; margin: 0 0 9px; padding: 5px 8px; border-radius: 20px; background: #edf3ff; color: #2456a1; font-size: 10px; font-weight: 700; }
+.jobs-deadline-note { color: #71809a; font-size: 11px; margin-top: 8px; }
+
+.services-search {
+    margin: 18px 0;
+}
+
+.services-search input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 14px;
+    background: white;
+}
+
+.service-filters {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 3px 0 12px;
+    margin-bottom: 12px;
+}
+
+.service-filters button {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    border-radius: 25px;
+    background: white;
+    color: #24436f;
+    border: 1px solid #dce6f5;
+    font-size: 12px;
+}
+
+.service-filters button.active {
+    background: #173b82;
+    color: white;
+}
+
+.premium-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.premium-service-card {
+    min-width: 0;
+    padding: 17px 14px;
+    background: white;
+    border: 1px solid #e0e8f5;
+    border-radius: 19px;
+    box-shadow: 0 6px 18px #173b820c;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.premium-service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px #173b821c;
+}
+
+.premium-service-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    background: #edf3ff;
+    border-radius: 15px;
+    margin-bottom: 13px;
+}
+
+.premium-service-card h3 {
+    color: #183969;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.premium-service-card p {
+    color: #71809a;
+    font-size: 12px;
+    line-height: 1.6;
+    min-height: 38px;
+}
+
+.service-open-link {
+    display: inline-block;
+    margin-top: 13px;
+    color: #245fc1;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.service-open-link:hover {
+    text-decoration: underline;
+}
+
+.services-note {
+    margin-top: 18px;
+    padding: 13px;
+    background: #fff5d8;
+    color: #795b12;
+    border-radius: 13px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+@media (max-width: 360px) {
+    .premium-service-grid {
+        gap: 9px;
+    }
+
+    .premium-service-card {
+        padding: 13px 10px;
+    }
+}
+
+
+/* Advanced Nepal Sewa vacancy explorer */
+.jobs-hero-pro{position:relative;overflow:hidden;box-shadow:0 12px 30px #173b8220}
+.jobs-hero-pro:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-70px;background:#ffffff12;border:1px solid #ffffff25}
+.jobs-hero-top{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:1.2px;color:#d9e7ff;margin-bottom:14px}
+.jobs-live-dot{width:7px;height:7px;border-radius:50%;background:#8af0bd;box-shadow:0 0 0 4px #8af0bd25}
+.jobs-beta{font-size:9px;padding:4px 7px;border-radius:6px;background:#ffffff20;letter-spacing:.5px}
+.jobs-hero-pro h3{font-size:26px;line-height:1.15;max-width:320px}
+.jobs-hero-stats{display:flex;gap:0;margin-top:19px;padding-top:14px;border-top:1px solid #ffffff35}
+.jobs-hero-stats div{display:flex;flex-direction:column;gap:4px;flex:1;border-right:1px solid #ffffff30;padding-left:10px}
+.jobs-hero-stats div:first-child{padding-left:0}.jobs-hero-stats div:last-child{border:0}
+.jobs-hero-stats strong{font-size:17px}.jobs-hero-stats span{font-size:10px;color:#e0eaff}
+.jobs-search-panel{background:#fff;border:1px solid #e1e8f3;border-radius:17px;padding:15px;box-shadow:0 7px 20px #1d3a6810}
+.jobs-search-panel label{font-weight:800;font-size:13px}
+.jobs-search-wrap{display:flex;align-items:center;gap:8px;border:1px solid #dce5f2;border-radius:12px;padding-left:12px;margin-top:8px}
+.jobs-search-wrap span{font-size:23px;color:#52709d}.jobs-search-wrap input{border:0!important;outline:none;box-shadow:none!important;margin:0;padding:13px 8px}
+.jobs-select-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.jobs-select-row select{margin:0;padding:11px 8px;font-size:12px;background:#f8faff}
+.jobs-section-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 1px 10px}
+.jobs-section-heading h4{font-size:16px}.jobs-section-heading p{font-size:11px;color:#74829a;margin-top:4px;line-height:1.4}
+.jobs-results-count{white-space:nowrap;background:#e6efff;color:#2456a1;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800}
+.jobs-grid-pro{display:grid;grid-template-columns:1fr;gap:12px}
+.job-listing-card{background:#fff;border:1px solid #e0e7f2;border-radius:17px;padding:15px;box-shadow:0 5px 17px #183d7510;transition:transform .18s,box-shadow .18s}
+.job-listing-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px #183d7519}
+.job-card-head{display:flex;align-items:flex-start;gap:11px}
+.job-org-icon{width:46px;height:46px;display:grid;place-items:center;flex-shrink:0;border-radius:13px;background:#edf3ff;font-size:23px}
+.job-card-main{min-width:0;flex:1}.job-card-main .jobs-category{margin-bottom:6px;font-size:9px;letter-spacing:.3px}
+.job-card-main h3{font-size:15px;line-height:1.35;color:#18345e}.job-card-main p{font-size:11px;color:#71809a;margin-top:4px;line-height:1.45}
+.job-status{font-size:9px;font-weight:800;white-space:nowrap;border-radius:20px;padding:6px 7px}
+.status-check{background:#fff4d8;color:#946411}
+.job-meta-row{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0 10px}
+.job-meta-row span{font-size:10px;color:#506583;background:#f4f7fc;border-radius:7px;padding:7px 8px}
+.job-summary{font-size:12px;line-height:1.6;color:#52647f}
+.job-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:9px;border-top:1px solid #edf0f6;margin-top:13px;padding-top:12px}
+.job-source{font-size:10px;color:#8793a7;line-height:1.4;max-width:55%}
+.job-apply-btn{display:inline-flex;align-items:center;justify-content:center;background:#173b82;color:#fff;text-decoration:none;font-size:11px;font-weight:800;border-radius:9px;padding:10px 12px;white-space:nowrap}
+.job-apply-btn:hover{background:#2865bc}
+@media(min-width:650px){.jobs-grid-pro{grid-template-columns:1fr 1fr}.jobs-hero-pro h3{font-size:30px}}
+
+
+/* Auto-refresh status panel */
+.jobs-refresh-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:13px 14px;background:#f4f8ff;border:1px solid #dbe7fb;border-radius:15px}
+.jobs-refresh-copy{display:flex;align-items:flex-start;gap:10px;min-width:0}.jobs-refresh-copy strong{display:block;color:#18345e;font-size:12px}.jobs-refresh-copy p{font-size:11px;color:#687b97;line-height:1.45;margin-top:4px}.jobs-refresh-copy small{display:block;color:#8996aa;font-size:10px;margin-top:5px}
+.jobs-refresh-indicator{width:9px;height:9px;flex-shrink:0;border-radius:50%;background:#e5a323;margin-top:3px;box-shadow:0 0 0 4px #e5a32320}.jobs-refresh-indicator.ok{background:#1aa56a;box-shadow:0 0 0 4px #1aa56a20}.jobs-refresh-indicator.error{background:#d64b4b;box-shadow:0 0 0 4px #d64b4b20}
+.jobs-refresh-btn{border:0;border-radius:10px;background:#173b82;color:#fff;font-size:11px;font-weight:800;padding:11px 12px;white-space:nowrap;cursor:pointer}.jobs-refresh-btn:disabled{opacity:.6;cursor:wait}
+.job-local-draft{border-style:dashed;background:#fffdf7}
+@media(max-width:420px){.jobs-refresh-panel{align-items:flex-start;flex-direction:column}.jobs-refresh-btn{width:100%}.post-job-grid{grid-template-columns:1fr}}
+
+/* Employer job-posting panel */
+.post-job-launch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0;padding:16px;background:linear-gradient(135deg,#fff,#f2f6ff);border:1px solid #dce6f7;border-radius:17px;box-shadow:0 6px 20px #183d750c}
+.post-job-launch h4{font-size:15px;color:#18345e;margin-bottom:5px}.post-job-launch p{font-size:11px;color:#6c7d96;line-height:1.45}
+.post-job-toggle{border:0;border-radius:10px;background:#173b82;color:white;padding:12px 13px;font-weight:800;font-size:11px;white-space:nowrap;cursor:pointer}
+.post-job-panel{background:#fff;border:1px solid #dfe7f3;border-radius:18px;padding:17px;margin:12px 0 20px;box-shadow:0 9px 28px #173b8212}
+.post-job-panel[hidden]{display:none}.post-job-panel h4{font-size:18px;color:#17345f;margin-bottom:5px}.post-job-intro{font-size:12px;color:#71809a;line-height:1.5;margin-bottom:17px}
+.post-job-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.post-job-field{min-width:0}.post-job-field.full{grid-column:1/-1}
+.post-job-field label{display:block;font-size:11px;font-weight:800;color:#354761;margin-bottom:6px}.post-job-field input,.post-job-field select,.post-job-field textarea{width:100%;padding:12px;border:1px solid #d9e2ef;border-radius:10px;background:#fbfcff;color:#203650;font:inherit;font-size:12px;box-sizing:border-box}.post-job-field textarea{resize:vertical;min-height:88px}
+.post-job-submit{width:100%;border:0;border-radius:11px;background:#17834c;color:white;padding:13px;font-size:13px;font-weight:800;margin-top:15px;cursor:pointer}.post-job-submit:hover{background:#126d3e}
+.post-job-disclaimer{background:#fff7e4;border:1px solid #f5e1a8;color:#75571a;border-radius:10px;padding:11px;font-size:11px;line-height:1.5;margin-top:12px}
+.post-job-success{background:#e9f9ef;color:#17653a;border-radius:10px;padding:11px;font-size:12px;margin-top:12px}
+@media(max-width:430px){.post-job-grid{grid-template-columns:1fr}.post-job-field.full{grid-column:auto}.post-job-launch{align-items:flex-start;flex-direction:column}.post-job-toggle{width:100%}}
+
+
+/* ===== NEPAL SEWA NEWS ===== */
+.news-panel{background:#fff;border:1px solid #e1e9f5;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 8px 24px #173b820d}
+.news-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.news-topline h3{font-size:17px;color:#173b82}.news-status{font-size:11px;color:#64748b;margin:9px 0 13px;line-height:1.5}
+.news-actions{display:flex;gap:8px;flex-wrap:wrap}.news-btn{border:0;border-radius:10px;padding:10px 13px;background:#173b82;color:#fff;font-weight:700;font-size:12px;cursor:pointer}.news-btn.secondary{background:#eaf0fb;color:#173b82}
+.news-list{display:grid;gap:12px}.news-card{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;padding:12px;background:#fff;border:1px solid #e5ebf4;border-radius:14px;min-width:0}.news-thumb{width:104px;height:92px;object-fit:cover;border-radius:10px;background:linear-gradient(135deg,#173b82,#4e82c9);display:grid;place-items:center;color:white;font-size:28px}.news-card h4{font-size:14px;line-height:1.4;color:#17345f;margin:3px 0 6px}.news-card p{font-size:12px;line-height:1.5;color:#58677f;margin:0 0 7px}.news-meta{font-size:10px;color:#71809a;margin-bottom:5px}.news-link{font-size:11px;font-weight:800;color:#2457a5;text-decoration:none}.news-form{display:grid;gap:10px;margin-top:12px}.news-form label{display:block;font-size:11px;font-weight:800;color:#354761;margin-bottom:4px}.news-form input,.news-form select,.news-form textarea{width:100%;box-sizing:border-box;padding:11px;border:1px solid #d9e2ef;border-radius:10px;font:inherit;font-size:12px}.news-form textarea{min-height:76px;resize:vertical}.news-empty{font-size:12px;color:#71809a;padding:14px;text-align:center;background:#f6f8fc;border-radius:12px}
+@media(max-width:430px){.news-card{grid-template-columns:82px minmax(0,1fr);gap:9px;padding:9px}.news-thumb{width:82px;height:82px}}
+
+
+/* ===== HOME EMERGENCY CONTACTS ===== */
+.emergency-section{margin:28px 0 22px;padding:18px;background:#fff;border:1px solid #e2e9f4;border-radius:18px;box-shadow:0 8px 22px rgba(20,43,85,.07)}
+.emergency-section h2{margin-bottom:8px}
+.emergency-intro{color:#64748b;font-size:13px;line-height:1.5;margin-bottom:14px}
+.emergency-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.emergency-card{display:flex;align-items:center;gap:10px;min-width:0;padding:12px;border:1px solid #e3eaf5;border-radius:13px;background:#f8faff}
+.emergency-icon{font-size:24px;flex:0 0 30px;text-align:center}
+.emergency-info{min-width:0;flex:1}
+.emergency-info strong{display:block;font-size:13px;color:#17305c}
+.emergency-info small{display:block;color:#71809a;font-size:11px;margin-top:3px}
+.emergency-call{display:inline-block;margin-top:6px;padding:6px 10px;border-radius:8px;background:#173b82;color:#fff;text-decoration:none;font-weight:700;font-size:13px;white-space:nowrap}
+.emergency-call:focus,.emergency-call:hover{background:#2865bc;outline:2px solid #ffcf55}
+.emergency-note{margin-top:13px;color:#64748b;font-size:11px;line-height:1.5}
+@media(max-width:420px){.emergency-grid{grid-template-columns:1fr}}
+
+
+/* Language switcher */
+.goog-te-gadget{font-family:Arial,sans-serif!important;color:#fff!important;font-size:12px!important}
+.goog-te-gadget .goog-te-combo{margin:0!important;padding:7px 9px;border:1px solid #dbeafe;border-radius:9px;background:#fff;color:#173b82;font-weight:600;max-width:135px}
+.goog-te-gadget span{display:none!important}
+.goog-te-banner-frame.skiptranslate{display:none!important}
+body{top:0!important}
+#google_translate_element{margin-left:auto;display:flex;align-items:center;min-width:115px;justify-content:flex-end}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+@media(max-width:420px){#google_translate_element{max-width:125px}.goog-te-gadget .goog-te-combo{max-width:125px}}
+
+
+/* ===== MODERN UI FINISH ===== */
+:root {
+  --ns-blue: #1d4ed8;
+  --ns-gold: #f5c451;
+  --ns-card: #ffffff;
+  --ns-line: #e4eaf4;
+  --ns-muted: #71809a;
+  --ns-shadow: 0 12px 30px rgba(20, 43, 85, .075);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: radial-gradient(ellipse at 12% 0%, #e5edff 0, transparent 34%),
+              linear-gradient(180deg, #f5f7fc 0%, #edf2fa 100%);
+  color: #172b4d;
+  letter-spacing: .05px;
+}
+header {
+  position: sticky; top: 0; z-index: 60;
+  min-height: 68px;
+  padding: 13px clamp(15px, 4vw, 34px);
+  background: rgba(13, 35, 78, .96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 25px rgba(9, 28, 66, .18);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.logo { letter-spacing: -.7px; font-size: 24px; }
+#google_translate_element { margin-left: auto; margin-right: 15px; }
+.goog-te-gadget .goog-te-combo {
+  margin: 0 !important; padding: 8px 10px !important;
+  border: 1px solid rgba(255,255,255,.25) !important;
+  border-radius: 11px !important; background: #fff !important;
+  color: #173b82 !important; font-size: 12px !important;
+  max-width: 145px;
+}
+.goog-te-gadget { color: transparent !important; font-size: 0 !important; }
+.goog-logo-link, .goog-te-gadget span { display: none !important; }
+.welcome {
+  position: relative; overflow: hidden;
+  padding: clamp(30px, 6vw, 52px) clamp(18px, 4vw, 34px) 27px;
+  border-radius: 0 0 30px 30px;
+  background: linear-gradient(125deg, #102653 0%, #17458f 55%, #3478df 100%);
+  box-shadow: 0 16px 34px rgba(23,59,130,.17);
+}
+.welcome::after {
+  content: ""; position: absolute; width: 230px; height: 230px;
+  right: -75px; top: -105px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 0 0 28px rgba(255,255,255,.035), 0 0 0 58px rgba(255,255,255,.025);
+  pointer-events: none;
+}
+.welcome h1, .welcome h2 { position: relative; z-index: 1; font-size: clamp(25px, 4vw, 34px); letter-spacing: -.8px; line-height: 1.2; }
+.welcome p { position: relative; z-index: 1; max-width: 540px; color: #e2ebff; font-size: 14px; }
+.district-box { position: relative; z-index: 1; border: 1px solid rgba(255,255,255,.55); border-radius: 17px; box-shadow: 0 10px 24px rgba(7,25,62,.13); }
+.container { max-width: 980px; }
+.section-title { font-size: 21px; letter-spacing: -.55px; }
+.service { min-height: 112px; border-radius: 20px; }
+.service .icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: #edf3ff; }
+.service h3 { font-size: 13px; }
+.alert-card, .latest-box, .form-box, .info-box, .live-weather, .bs-calendar { border-radius: 21px; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: #6b98ed; box-shadow: 0 0 0 4px rgba(59,130,246,.12); }
+button, a { -webkit-tap-highlight-color: transparent; }
+.bottom-nav { max-width: 690px; }
+@media (max-width: 520px) {
+  header { min-height: 62px; gap: 7px; }
+  .logo { font-size: 19px; white-space: nowrap; }
+  #google_translate_element { margin-right: 5px; }
+  .goog-te-gadget .goog-te-combo { max-width: 112px; padding: 7px 5px !important; }
+  .bell { font-size: 22px; }
+  .welcome { border-radius: 0 0 25px 25px; }
+  .service { min-height: 100px; }
+}
+/* ===== END MODERN UI FINISH ===== */
+
+
+
+/* ===== NEPAL SEWA: MODERN VISUAL POLISH ===== */
+:root {
+  --ns-ink: #142746;
+  --ns-muted: #687991;
+  --ns-blue: #174ea6;
+  --ns-blue-deep: #102e62;
+  --ns-line: #e4ebf5;
+  --ns-surface: #ffffff;
+  --ns-bg: #f4f7fc;
+  --ns-shadow: 0 12px 30px rgba(20, 48, 91, .08);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: var(--ns-ink);
+  background: radial-gradient(circle at 12% 0%, #e8f0ff 0, transparent 30%), var(--ns-bg);
+  letter-spacing: .05px;
+}
+header {
+  position: sticky; top: 0; z-index: 50;
+  padding: 14px clamp(16px, 4vw, 30px);
+  background: rgba(13, 43, 91, .96);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(8, 31, 68, .18);
+}
+.logo { font-size: clamp(21px, 3vw, 25px); letter-spacing: -.6px; }
+.logo span { color: #ffd66b; }
+.welcome {
+  position: relative; overflow: hidden;
+  padding: clamp(28px, 6vw, 44px) clamp(18px, 5vw, 34px);
+  border-radius: 0 0 30px 30px;
+  background: linear-gradient(125deg, #102e62 0%, #174ea6 58%, #397bd0 100%);
+  box-shadow: 0 16px 35px rgba(23, 78, 166, .18);
+}
+.welcome:after {
+  content: ""; position: absolute; width: 230px; height: 230px; border-radius: 50%;
+  right: -75px; top: -105px; border: 1px solid rgba(255,255,255,.17);
+  box-shadow: 0 0 0 24px rgba(255,255,255,.045), 0 0 0 52px rgba(255,255,255,.035);
+  pointer-events: none;
+}
+.welcome > * { position: relative; z-index: 1; }
+.welcome h1, .welcome h2 { letter-spacing: -.7px; line-height: 1.2; }
+.welcome p { color: rgba(255,255,255,.86); max-width: 560px; }
+.district-box, .service, .alert-card, .form-box, .latest-box,
+.job-card, .news-card, .emergency-card, .info-box, .calendar-box {
+  background: var(--ns-surface);
+  border: 1px solid var(--ns-line);
+  border-radius: 18px;
+  box-shadow: var(--ns-shadow);
+}
+.district-box { padding: 17px; }
+.container { max-width: 900px; padding: 26px clamp(14px, 3vw, 24px); }
+.section-title { font-size: clamp(19px, 3vw, 22px); font-weight: 800; letter-spacing: -.45px; }
+.services { gap: 14px; }
+.service {
+  min-height: 116px; padding: 20px 8px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.service:hover { transform: translateY(-5px); border-color: #c8d9f5; box-shadow: 0 16px 30px rgba(23,78,166,.13); }
+.service .icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: #edf4ff; margin-bottom: 11px; }
+.service h3 { color: #203a60; font-size: 13px; font-weight: 750; }
+select, input, textarea {
+  border: 1px solid #dce5f1; border-radius: 12px; color: var(--ns-ink);
+  outline: none; transition: border-color .18s, box-shadow .18s;
+}
+select:focus, input:focus, textarea:focus { border-color: #6d9ee8; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+button, .back-btn, .filter-btn, .small-btn { transition: transform .16s ease, filter .16s ease, box-shadow .16s ease; }
+button:hover, .back-btn:hover, .filter-btn:hover, .small-btn:hover { filter: brightness(.98); }
+button:active, .back-btn:active, .filter-btn:active, .small-btn:active { transform: scale(.98); }
+.alert-hero { background: linear-gradient(130deg, #102e62, #2462b5); padding: 20px; border-radius: 0 0 24px 24px; }
+.alert-card { padding: 18px; box-shadow: 0 7px 22px rgba(20,48,91,.055); }
+.latest-box { padding: 17px; }
+.filter-row { gap: 9px; }
+.filter-btn { padding: 10px 15px; }
+.form-box { padding: 19px; }
+#counter { box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+a { text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid rgba(76, 139, 232, .55); outline-offset: 2px; }
+@media (min-width: 650px) {
+  .services { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+}
+@media (max-width: 420px) {
+  header { padding: 12px 14px; }
+  .logo { font-size: 20px; }
+  .services { gap: 10px; }
+  .service { min-height: 104px; border-radius: 15px; }
+  .service .icon { width: 43px; height: 43px; font-size: 25px; }
+  .container { padding: 20px 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/nepali-date-converter/dist/nepali-date-converter.umd.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🇳🇵 Nepal <span>Sewa</span></div>
+    <div id="google_translate_element" aria-label="Choose language"></div>
+    <div class="bell" onclick="showPage('alerts')">
+        🔔 <span id="counter">0</span>
+    </div>
+</header>
+
+<!-- HOME SCREEN -->
+<section id="homePage">
+
+    <div class="welcome">
+        <h2>Your Nepal, Your Services 🇳🇵</h2>
+        <p>Government services, public alerts and opportunities in one place.</p>
+
+        <div class="district-box">
+            <label for="district">📍 Choose Your District</label>
+            <select id="district" onchange="loadLiveWeather()">
+                <option value="">Select your district (77 districts)</option>
+                <optgroup label="Koshi Province">
+                    <option>Bhojpur</option><option>Dhankuta</option><option>Ilam</option><option>Jhapa</option><option>Khotang</option><option>Morang</option><option>Okhaldhunga</option><option>Panchthar</option><option>Sankhuwasabha</option><option>Solukhumbu</option><option>Sunsari</option><option>Taplejung</option><option>Terhathum</option><option>Udayapur</option>
+                </optgroup>
+                <optgroup label="Madhesh Province">
+                    <option>Bara</option><option>Dhanusha</option><option>Mahottari</option><option>Parsa</option><option>Rautahat</option><option>Saptari</option><option>Sarlahi</option><option>Siraha</option>
+                </optgroup>
+                <optgroup label="Bagmati Province">
+                    <option>Bhaktapur</option><option>Chitwan</option><option>Dhading</option><option>Dolakha</option><option>Kathmandu</option><option>Kavrepalanchok</option><option>Lalitpur</option><option>Makwanpur</option><option>Nuwakot</option><option>Ramechhap</option><option>Rasuwa</option><option>Sindhuli</option><option>Sindhupalchok</option>
+                </optgroup>
+                <optgroup label="Gandaki Province">
+                    <option>Baglung</option><option>Gorkha</option><option>Kaski</option><option>Lamjung</option><option>Manang</option><option>Mustang</option><option>Myagdi</option><option>Nawalpur (Nawalparasi East)</option><option>Parbat</option><option>Syangja</option><option>Tanahun</option>
+                </optgroup>
+                <optgroup label="Lumbini Province">
+                    <option>Arghakhanchi</option><option>Banke</option><option>Bardiya</option><option>Dang</option><option>Gulmi</option><option>Kapilvastu</option><option>Nawalparasi West (Parasi)</option><option>Palpa</option><option>Pyuthan</option><option>Rolpa</option><option>Rukum East (Eastern Rukum)</option><option>Rupandehi</option>
+                </optgroup>
+                <optgroup label="Karnali Province">
+                    <option>Dailekh</option><option>Dolpa</option><option>Humla</option><option>Jajarkot</option><option>Jumla</option><option>Kalikot</option><option>Mugu</option><option>Rukum West (Western Rukum)</option><option>Salyan</option><option>Surkhet</option>
+                </optgroup>
+                <optgroup label="Sudurpashchim Province">
+                    <option>Achham</option><option>Baitadi</option><option>Bajhang</option><option>Bajura</option><option>Dadeldhura</option><option>Darchula</option><option>Doti</option><option>Kailali</option><option>Kanchanpur</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+
+    <main class="container">
+        <h2 class="section-title">Explore Services</h2>
+
+        <div class="services">
+            <div class="service" onclick="showPage('alerts')">
+                <div class="icon">🔔</div><h3>Alerts</h3>
+            </div>
+            <div class="service" onclick="showPage('news')">
+                <div class="icon">📰</div><h3>News</h3>
+            </div>
+            <div class="service" onclick="showPage('jobs')">
+                <div class="icon">💼</div><h3>Jobs</h3>
+            </div>
+            <div class="service" onclick="showPage('services')">
+                <div class="icon">🛠️</div><h3>Services</h3>
+            </div>
+            <div class="service" onclick="showPage('government')">
+                <div class="icon">🏛️</div><h3>Govt.</h3>
+            </div>
+            <div class="service" onclick="showPage('calendar')">
+                <div class="icon">📅</div><h3>Calendar</h3>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top:28px">
+            Official Alerts & Public Notices
+        </h2>
+<div id="bipadDisasters">
+  <p>Loading disaster updates...</p>
+</div>
+
+<button onclick="loadBipadDisasters()">
+  Refresh Disaster Updates
+</button>
+
+<p id="bipadStatus">Connecting to BIPAD...</p>
+        <div id="homeAlerts"></div>
+
+
+        <!-- EMERGENCY CONTACTS -->
+        <section class="emergency-section" aria-labelledby="emergencyTitle">
+            <h2 id="emergencyTitle">🆘 Emergency Contacts</h2>
+            <p class="emergency-intro">Nepal ko important emergency numbers. Tap <b>Call</b> to dial directly from a phone.</p>
+            <div class="emergency-grid">
+                <div class="emergency-card"><span class="emergency-icon">👮</span><div class="emergency-info"><strong>Nepal Police</strong><small>Police emergency</small><a class="emergency-call" href="tel:100">Call 100</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🚒</span><div class="emergency-info"><strong>Fire Brigade (Damkal)</strong><small>Fire emergency</small><a class="emergency-call" href="tel:101">Call 101</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🚑</span><div class="emergency-info"><strong>Ambulance</strong><small>Medical emergency</small><a class="emergency-call" href="tel:102">Call 102</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🚦</span><div class="emergency-info"><strong>Traffic Police</strong><small>Road accident / traffic help</small><a class="emergency-call" href="tel:103">Call 103</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🧒</span><div class="emergency-info"><strong>Missing Child Response</strong><small>Report a missing child</small><a class="emergency-call" href="tel:104">Call 104</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🧑‍🤝‍🧑</span><div class="emergency-info"><strong>Child Helpline</strong><small>Help and protection for children</small><a class="emergency-call" href="tel:1098">Call 1098</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🛡️</span><div class="emergency-info"><strong>Armed Police Force</strong><small>Emergency support</small><a class="emergency-call" href="tel:1114">Call 1114</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🧡</span><div class="emergency-info"><strong>Women Helpline</strong><small>Support for women in danger</small><a class="emergency-call" href="tel:1145">Call 1145</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🌊</span><div class="emergency-info"><strong>Disaster / Rescue Helpline</strong><small>Disaster emergency support</small><a class="emergency-call" href="tel:1234">Call 1234</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🌧️</span><div class="emergency-info"><strong>Weather / Hydrology</strong><small>Department of Hydrology and Meteorology</small><a class="emergency-call" href="tel:1155">Call 1155</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🧠</span><div class="emergency-info"><strong>Mental Health Support</strong><small>National suicide prevention helpline</small><a class="emergency-call" href="tel:1166">Call 1166</a></div></div>
+                <div class="emergency-card"><span class="emergency-icon">🪖</span><div class="emergency-info"><strong>Nepal Army Search & Rescue</strong><small>Search and rescue support</small><a class="emergency-call" href="tel:1191">Call 1191</a></div></div>
+            </div>
+            <p class="emergency-note">Emergency numbers can change and availability may depend on your area or mobile network. If a number does not connect, contact local police or the nearest emergency service. Calls open your phone dialer; confirm before dialing. Sources: Nepal Telecommunications Authority numbering plan and Ncell emergency services directory.</p>
+        </section>
+
+        <div class="info-box">
+            <b>🇳🇵 Nepal Sewa</b>
+            <p>Your digital gateway to public information and services.</p>
+        </div>
+    </main>
+</section>
+
+<!-- NEW ALERTS SCREEN -->
+<section id="alertsPage" hidden>
+
+    <div class="alert-hero">
+        <button class="back-btn" onclick="showPage('home')">
+            ← Back to Home
+        </button>
+
+        <div class="latest-box">
+            <h3>🔔 Latest Alerts</h3>
+            <p>Stay informed. Stay safe.</p>
+        </div>
+    </div>
+
+    <main class="container">
+
+        
+        <div class="live-weather">
+            <h3>🌦️ Live Weather & Safety</h3>
+            <p id="weatherStatus">Select a district to load weather.</p>
+            <div id="weatherDetails"></div>
+            <p id="weatherUpdated"></p>
+            <p class="weather-note">
+                Forecast signals are not official emergency warnings.
+            </p>
+            <a href="https://www.dhm.gov.np/" target="_blank" rel="noopener noreferrer">
+                Official Nepal Weather Warnings ↗
+            </a>
+            <br>
+            <a href="https://bipadportal.gov.np/realtime" target="_blank" rel="noopener noreferrer">
+                Disaster & Flood Updates ↗
+            </a>
+            <br>
+            <a href="https://hydrology.gov.np/" target="_blank" rel="noopener noreferrer">
+                Hydrology & River Updates ↗
+            </a>
+        </div>
+
+        <!-- OFFICIAL ALERT FEED -->
+        <div class="live-weather" id="officialAlertBox">
+            <h3>🇳🇵 Official Disaster Alerts</h3>
+            <div class="live-feed-status"><span class="live-dot"></span><span id="officialAlertStatus">Connecting to BIPAD live feed...</span></div>
+            <p id="officialAlertChecked" class="weather-note">Waiting for first update</p>
+            <div id="officialAlerts" aria-live="polite">
+                <p>Connecting to the official disaster alert feed...</p>
+            </div>
+            <button class="save-btn" type="button" onclick="loadOfficialAlerts(true)">
+                ↻ Refresh Live Alerts
+            </button>
+            <p class="weather-note" style="margin-top:12px">
+                Only information confirmed by the issuing authority should be treated as an official warning.
+                Weather forecasts are not official emergency alerts.
+            </p>
+            <a href="https://www.dhm.gov.np/" target="_blank" rel="noopener noreferrer">Department of Hydrology and Meteorology ↗</a><br>
+            <a href="https://bipadportal.gov.np/" target="_blank" rel="noopener noreferrer">BIPAD Disaster Information Portal ↗</a><br>
+            <a href="https://hydrology.gov.np/" target="_blank" rel="noopener noreferrer">Department of Hydrology and Meteorology — Hydrology ↗</a>
+        </div>
+
+        <div class="form-box">
+            <h3>🔔 Browser Notifications</h3>
+            <p style="font-size:13px;color:#78869a;margin-top:6px">
+                Allow browser notifications for this device. This demo can show notifications while this page is open;
+                background push notifications require a hosted service worker, Firebase and a secure backend.
+            </p>
+            <button class="save-btn" type="button" id="enableNotifications" onclick="enableBrowserNotifications()">
+                Enable Browser Notifications
+            </button>
+            <p id="notificationStatus" aria-live="polite" style="font-size:13px;margin-top:8px"></p>
+        </div>
+
+        <div class="filter-row">
+            <button class="filter-btn active"
+                    onclick="setFilter('all',this)">All Alerts</button>
+
+            <button class="filter-btn emergency"
+                    onclick="setFilter('emergency',this)">🚨 Emergency</button>
+
+            <button class="filter-btn weather"
+                    onclick="setFilter('weather',this)">🌤️ Weather</button>
+
+            <button class="filter-btn notices"
+                    onclick="setFilter('notices',this)">📢 Notices</button>
+        </div>
+
+        <div id="alertList"></div>
+
+        <div class="form-box">
+            <h3>➕ Add a Notice</h3>
+            <p style="font-size:13px;color:#78869a;margin-top:6px">
+                Add a notice to your locally saved alerts.
+            </p>
+
+            <input id="noticeTitle"
+                   maxlength="150"
+                   placeholder="Notice title">
+
+            <textarea id="noticeMessage"
+                      maxlength="5000"
+                      placeholder="Write the alert message..."></textarea>
+
+            <select id="noticeCategory">
+                <option value="notices">Public Notice</option>
+                <option value="emergency">Emergency</option>
+                <option value="weather">Weather</option>
+            </select>
+
+            <button class="save-btn" onclick="addNotice()">
+                💾 Save Notice
+            </button>
+        </div>
+    </main>
+</section>
+
+<!-- OTHER SECTIONS -->
+
+<section id="otherPage" hidden>
+    <main class="container">
+        <button class="small-btn" onclick="showPage('home')">
+            ← Back to Home
+        </button>
+
+        <h2 class="section-title" id="otherTitle"
+            style="margin-top:20px"></h2>
+
+        <!-- BS Calendar -->
+        <div id="bsCalendarPage" hidden>
+            <div class="bs-calendar">
+                <div class="bs-date-info" id="bsToday"></div>
+
+                <div class="bs-month-controls">
+                    <button onclick="changeBSMonth(-1)">←</button>
+                    <strong id="bsMonthTitle"></strong>
+                    <button onclick="changeBSMonth(1)">→</button>
+                </div>
+
+                <div class="bs-weekdays">
+                    <span>आइत</span>
+                    <span>सोम</span>
+                    <span>मंगल</span>
+                    <span>बुध</span>
+                    <span>बिही</span>
+                    <span>शुक्र</span>
+                    <span>शनि</span>
+                </div>
+
+                <div class="bs-days" id="bsDays"></div>
+
+                <div class="bs-legend">
+                    <span><i class="legend-dot today-dot"></i> Today</span>
+                    <span><i class="legend-dot festival-dot"></i> Festival / Holiday</span>
+                </div>
+                <div id="bsFestivalDetails" class="bs-festival-details">
+                    Select a highlighted date to see its festival.
+                </div>
+
+                <p style="text-align:center;margin-top:12px">
+                    <button class="bs-today-btn"
+                            onclick="goBSToday()">आजको मिति</button>
+                </p>
+            </div>
+        </div>
+
+        
+<!-- PREMIUM SERVICES CONTENT -->
+<div id="servicesContent" hidden>
+
+    <div class="services-hero">
+        <h3>Services, made simple 🇳🇵</h3>
+        <p>
+            Find useful government, education, health,
+            transport and daily services in one place.
+        </p>
+    </div>
+
+    <div class="services-search">
+        <input
+            type="search"
+            id="serviceSearch"
+            placeholder="🔎 Search services..."
+            oninput="filterServices()"
+        >
+    </div>
+
+    <div class="service-filters">
+        <button class="active"
+                onclick="setServiceFilter('all',this)">All</button>
+        <button onclick="setServiceFilter('government',this)">Government</button>
+        <button onclick="setServiceFilter('education',this)">Education</button>
+        <button onclick="setServiceFilter('health',this)">Health</button>
+        <button onclick="setServiceFilter('transport',this)">Transport</button>
+        <button onclick="setServiceFilter('safety',this)">Safety</button>
+    </div>
+
+    <div class="premium-service-grid" id="premiumServiceGrid">
+
+        <article class="premium-service-card" data-category="government">
+            <div class="premium-service-icon">🏛️</div>
+            <h3>Nagarik App</h3>
+            <p>Explore digital public services and available documents.</p>
+            <a class="service-open-link"
+               href="https://nagarikapp.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="government">
+            <div class="premium-service-icon">🛂</div>
+            <h3>Passport</h3>
+            <p>Visit the official passport department website.</p>
+            <a class="service-open-link"
+               href="https://nepalpassport.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="transport">
+            <div class="premium-service-icon">🚗</div>
+            <h3>Transport</h3>
+            <p>Find transport department information and services.</p>
+            <a class="service-open-link"
+               href="https://dotm.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="government">
+            <div class="premium-service-icon">💰</div>
+            <h3>Tax Services</h3>
+            <p>Visit the Inland Revenue Department website.</p>
+            <a class="service-open-link"
+               href="https://ird.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="education">
+            <div class="premium-service-icon">🎓</div>
+            <h3>SEE Results</h3>
+            <p>Check the available SEE result service.</p>
+            <a class="service-open-link"
+               href="https://see.ntc.net.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="education">
+            <div class="premium-service-icon">📚</div>
+            <h3>Education</h3>
+            <p>Explore education-related government information.</p>
+            <a class="service-open-link"
+               href="https://moest.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="health">
+            <div class="premium-service-icon">🏥</div>
+            <h3>Health Information</h3>
+            <p>Visit the Ministry of Health and Population website.</p>
+            <a class="service-open-link"
+               href="https://mohp.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="safety">
+            <div class="premium-service-icon">🌦️</div>
+            <h3>Weather Updates</h3>
+            <p>Check weather information from the meteorological department.</p>
+            <a class="service-open-link"
+               href="https://www.dhm.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="safety">
+            <div class="premium-service-icon">🚨</div>
+            <h3>Disaster Updates</h3>
+            <p>Visit the BIPAD disaster information portal.</p>
+            <a class="service-open-link"
+               href="https://bipadportal.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+        <article class="premium-service-card" data-category="government">
+            <div class="premium-service-icon">🇳🇵</div>
+            <h3>Nepal Government</h3>
+            <p>Explore the government portal for public information.</p>
+            <a class="service-open-link"
+               href="https://nepal.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Service ↗</a>
+        </article>
+
+    </div>
+
+    <p id="noServicesFound" class="empty" hidden>
+        No matching services found. Try another search.
+    </p>
+
+    <div class="services-note">
+        ⚠️ Services open external websites. Check the website address
+        and follow its instructions. Availability may change.
+    </div>
+
+</div>
+
+
+<!-- GOVERNMENT SERVICES CONTENT -->
+<div id="governmentContent" hidden>
+    <div class="services-hero">
+        <h3>Government Services 🇳🇵</h3>
+        <p>Find official Nepal government websites for important public services.</p>
+    </div>
+
+    <div class="services-search">
+        <input type="search" id="governmentSearch"
+               placeholder="🔎 Search government services..."
+               oninput="filterGovernmentServices()">
+    </div>
+
+    <div class="premium-service-grid" id="governmentServiceGrid">
+        <article class="premium-service-card">
+            <div class="premium-service-icon">🏛️</div>
+            <h3>Nagarik App</h3>
+            <p>Explore digital public services and available documents.</p>
+            <a class="service-open-link" href="https://nagarikapp.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+        </article>
+
+        <article class="premium-service-card">
+            <div class="premium-service-icon">🛂</div>
+            <h3>Passport Services</h3>
+            <p>Visit the Department of Passports for passport information.</p>
+            <a class="service-open-link" href="https://nepalpassport.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+        </article>
+
+        <article class="premium-service-card">
+            <div class="premium-service-icon">💳</div>
+            <h3>PAN & Tax</h3>
+            <p>Find tax information and PAN-related services.</p>
+            <a class="service-open-link" href="https://ird.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+        </article>
+
+        <article class="premium-service-card">
+            <div class="premium-service-icon">🚗</div>
+            <h3>Driving Licence</h3>
+            <p>Access the online driving licence application system.</p>
+            <a class="service-open-link" href="https://applydl.dotm.gov.np/login"
+               target="_blank" rel="noopener noreferrer">Open Application Portal ↗</a>
+        </article>
+
+        <article class="premium-service-card">
+            <div class="premium-service-icon">🚦</div>
+            <h3>Department of Transport</h3>
+            <p>Check transport-related government information.</p>
+            <a class="service-open-link" href="https://dotm.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+        </article>
+
+        <article class="premium-service-card">
+            <div class="premium-service-icon">🇳🇵</div>
+            <h3>Nepal Government Portal</h3>
+            <p>Find public information from the Government of Nepal.</p>
+            <a class="service-open-link" href="https://nepal.gov.np/"
+               target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+        </article>
+    </div>
+
+    <p id="noGovernmentServices" class="empty" hidden>
+        No matching services found. Try another search.
+    </p>
+
+    <div class="services-note">
+        ⚠️ These links open external websites. Check the website address and never share passwords or OTPs with anyone.
+    </div>
+</div>
+
+
+
+        <!-- NEWS CONTENT -->
+        <div id="newsContent" hidden>
+            <div class="news-panel">
+                <div class="news-topline"><h3>🇳🇵 Latest Nepal News</h3><button type="button" class="news-btn" onclick="loadNepalNews()">↻ Refresh news</button></div>
+                <p class="news-status" id="newsStatus">Loading latest headlines…</p>
+                <div class="news-list" id="autoNewsList"><div class="news-empty">News feed load hudai chha…</div></div>
+                <p class="news-status">Headlines are provided by Google News RSS through RSS2JSON. Read the original publisher's article for full details. Feed availability may vary.</p>
+            </div>
+            <div class="news-panel">
+                <div class="news-topline"><h3>✍️ Share a News Update</h3></div>
+                <p class="news-status">Add a local news post for preview on this browser. Posts are not public or shared with other users.</p>
+                <form class="news-form" id="manualNewsForm">
+                    <div><label for="manualNewsTitle">Headline *</label><input id="manualNewsTitle" maxlength="140" required placeholder="Write a clear headline"></div>
+                    <div><label for="manualNewsCategory">Category *</label><select id="manualNewsCategory" required><option value="National">National</option><option value="Politics">Politics</option><option value="Education">Education</option><option value="Business">Business</option><option value="Sports">Sports</option><option value="Technology">Technology</option><option value="Local">Local</option></select></div>
+                    <div><label for="manualNewsSummary">Short summary *</label><textarea id="manualNewsSummary" maxlength="500" required placeholder="Write a short factual summary"></textarea></div>
+                    <div><label for="manualNewsImage">Image URL (optional)</label><input id="manualNewsImage" type="url" placeholder="https://example.com/image.jpg"></div>
+                    <div><label for="manualNewsSource">Source / publisher *</label><input id="manualNewsSource" maxlength="80" required placeholder="e.g. Official notice / Publisher name"></div>
+                    <div><label for="manualNewsLink">Original news link (optional)</label><input id="manualNewsLink" type="url" placeholder="https://..."></div>
+                    <button class="news-btn" type="submit">＋ Save news post</button>
+                    <p class="news-status" id="manualNewsMessage" aria-live="polite"></p>
+                </form>
+            </div>
+            <div class="news-panel"><div class="news-topline"><h3>🗞️ Community Posts</h3></div><div class="news-list" id="manualNewsList"><div class="news-empty">No local posts yet.</div></div></div>
+        </div>
+
+<!-- JOBS CONTENT -->
+<div id="jobsContent" hidden>
+    <div class="jobs-hero jobs-hero-pro">
+        <div class="jobs-hero-top"><span class="jobs-live-dot"></span> NEPAL SEWA CAREER HUB <span class="jobs-beta">BETA</span></div>
+        <h3>Find your next opportunity.</h3>
+        <p>Explore vacancy notices in one dashboard. Search by role, organization or location, then review the original notice before applying.</p>
+        <div class="jobs-hero-stats"><div><strong id="jobsVisibleCount">11</strong><span>Vacancy cards</span></div><div><strong>4</strong><span>Job categories</span></div><div><strong>1 place</strong><span>To explore</span></div></div>
+    </div>
+
+    <div class="post-job-launch">
+        <div><h4>🏪 Are you hiring?</h4><p>Business owner ho? Aafno vacancy requirement Nepal Sewa ma draft garnuhos.</p></div>
+        <button type="button" class="post-job-toggle" onclick="togglePostJobForm()">＋ Post a Requirement</button>
+    </div>
+    <section class="post-job-panel" id="postJobPanel" hidden aria-label="Post a job requirement">
+        <h4>Post a Job / Worker Requirement</h4>
+        <p class="post-job-intro">Aafno business ko lagi chahine staff ko details bhar्नुहोस्. Required fields fill garnuhos.</p>
+        <form id="postJobForm" onsubmit="submitLocalJobPost(event)">
+            <div class="post-job-grid">
+                <div class="post-job-field"><label for="postCompany">Business / Store Name *</label><input id="postCompany" required maxlength="90" placeholder="e.g. Kathmandu Clothing Store"></div>
+                <div class="post-job-field"><label for="postContact">Owner / Contact Person *</label><input id="postContact" required maxlength="70" placeholder="Sanchalak ko naam"></div>
+                <div class="post-job-field"><label for="postPhone">Phone Number *</label><input id="postPhone" type="tel" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="98XXXXXXXX"></div>
+                <div class="post-job-field"><label for="postSector">Business Sector *</label><select id="postSector" required><option value="">Select business type</option><option>Retail / Shopping</option><option>Hotel / Restaurant / Cafe</option><option>Office / Corporate</option><option>Delivery / Logistics</option><option>IT / Technology</option><option>Education</option><option>Health</option><option>Other</option></select></div>
+                <div class="post-job-field full"><label for="postTitle">Job Position Needed *</label><input id="postTitle" required maxlength="100" placeholder="e.g. Sales Assistant, Cashier, Delivery Rider"></div>
+                <div class="post-job-field"><label for="postEducation">Minimum Education *</label><select id="postEducation" required><option value="">Choose education</option><option>Class 8 or below</option><option>SEE / SLC Passed</option><option>+2 Passed</option><option>Bachelor Passed</option><option>Relevant skill / training</option><option>Not specified</option></select></div>
+                <div class="post-job-field"><label for="postExperience">Experience *</label><select id="postExperience" required><option>Freshers allowed</option><option>6 months</option><option>1+ year</option><option>2+ years</option><option>3+ years</option></select></div>
+                <div class="post-job-field"><label for="postSalary">Monthly Salary (NPR) *</label><input id="postSalary" required maxlength="50" placeholder="e.g. 15,000–20,000 / negotiable"></div>
+                <div class="post-job-field"><label for="postLocation">Job Location *</label><input id="postLocation" required maxlength="100" placeholder="e.g. Kohalpur, Banke"></div>
+                <div class="post-job-field"><label for="postType">Employment Type *</label><select id="postType" required><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option><option>Temporary</option></select></div>
+                <div class="post-job-field"><label for="postDeadline">Application Deadline *</label><input id="postDeadline" type="date" required></div>
+                <div class="post-job-field full"><label for="postDescription">Responsibilities / Requirements</label><textarea id="postDescription" maxlength="1200" placeholder="Skills, work hours, responsibilities, documents needed..."></textarea></div>
+            </div>
+            <button type="submit" class="post-job-submit">Save Job Draft</button>
+            <div class="post-job-disclaimer">🔒 Demo mode: this form saves a draft only in this browser. It does not publish the vacancy publicly or send the phone number to a server. Public posting needs a secure backend and employer verification.</div>
+            <div id="postJobMessage" aria-live="polite"></div>
+        </form>
+    </section>
+
+    <div class="jobs-refresh-panel" role="status" aria-live="polite">
+      <div class="jobs-refresh-copy"><span class="jobs-refresh-indicator" id="jobsRefreshDot"></span><div><strong id="jobsRefreshTitle">Auto-refresh enabled · every 3 minutes</strong><p id="jobsRefreshStatus">Showing saved vacancy listings. Connect a vacancy API for real live updates.</p><small id="jobsLastUpdated">Last checked: not yet refreshed</small></div></div>
+      <button type="button" class="jobs-refresh-btn" id="jobsRefreshButton" onclick="refreshJobsNow(true)">↻ Refresh now</button>
+    </div>
+
+    <div class="jobs-search-panel">
+        <label for="jobsSearch">Search vacancies</label>
+        <div class="jobs-search-wrap"><span>⌕</span><input type="search" id="jobsSearch" placeholder="Job title, organization, location..." oninput="filterJobs()"></div>
+        <div class="jobs-select-row">
+            <select id="jobsLocation" onchange="filterJobs()" aria-label="Filter by location"><option value="all">All locations</option><option value="national">National / Multiple locations</option><option value="kathmandu">Kathmandu Valley</option><option value="lumbini">Lumbini Province</option></select>
+            <select id="jobsLevel" onchange="filterJobs()" aria-label="Filter by career level"><option value="all">All levels</option><option value="entry">Entry level</option><option value="experienced">Experienced</option><option value="exam">Exam / Public service</option></select>
+        </div>
+    </div>
+
+    <div class="jobs-section-heading"><div><h4>Open vacancies · checked 29 Oct 2026</h4><p>Real vacancy summaries appear here. Tap the official source to verify details and apply.</p></div><span class="jobs-results-count" id="jobsResultsCount">6 results</span></div>
+    <div class="service-filters jobs-filters">
+        <button type="button" class="active" onclick="setJobFilter('all', this)">All</button>
+        <button type="button" onclick="setJobFilter('government', this)">Government</button>
+        <button type="button" onclick="setJobFilter('private', this)">Private</button>
+        <button type="button" onclick="setJobFilter('banking', this)">Banking</button>
+        <button type="button" onclick="setJobFilter('student', this)">Student / Entry</button>
+    </div>
+
+    <div class="jobs-grid-pro" id="jobsGrid">
+        <article class="job-listing-card job-card" data-category="government" data-location="kathmandu" data-level="exam" data-search="bir hospital nuclear medicine physician technologist 2 posts kathmandu medical vacancy deadline november 2 2026">
+            <div class="job-card-head"><div class="job-org-icon">🏥</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · HEALTH</span><h3>Bir Hospital — Nuclear Medicine Physician / Technologist</h3><p>National Academy of Medical Sciences · Kathmandu</p></div><span class="job-status status-check">Deadline soon</span></div>
+            <div class="job-meta-row"><span>📍 Kathmandu</span><span>👥 2 posts</span></div>
+            <p class="job-summary"><strong>Reported deadline: 2 Nov 2026.</strong> Check the official notice for required qualification, post type, fees and application procedure.</p>
+            <div class="job-card-bottom"><span class="job-source">Listing checked 29 Oct 2026</span><a href="https://nams.edu.np/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Official website ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="government" data-location="national" data-level="experienced" data-search="sebon assistant director law contract 2 posts securities board nepal deadline november 3 2026">
+            <div class="job-card-head"><div class="job-org-icon">📊</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · FINANCE / LAW</span><h3>SEBON — Assistant Director (Law)</h3><p>Securities Board of Nepal · Contract positions</p></div><span class="job-status status-check">Deadline soon</span></div>
+            <div class="job-meta-row"><span>📍 Nepal</span><span>👥 2 posts</span></div>
+            <p class="job-summary"><strong>Reported deadline: 3 Nov 2026.</strong> Review the official career notice for eligibility, contract terms and submission instructions.</p>
+            <div class="job-card-bottom"><span class="job-source">Official source: SEBON</span><a href="https://sebon.gov.np/career" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Official vacancy ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="government" data-location="national" data-level="experienced" data-search="sdoc software development operation center office prime minister developer analyst cybersecurity 42 posts deadline november 4 2026 it jobs">
+            <div class="job-card-head"><div class="job-org-icon">💻</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · IT / CYBERSECURITY</span><h3>SDOC — IT vacancies</h3><p>Software Development and Operation Center · PMO</p></div><span class="job-status status-check">Deadline soon</span></div>
+            <div class="job-meta-row"><span>📍 Nepal</span><span>👥 42 posts reported</span></div>
+            <p class="job-summary"><strong>Reported deadline: 4 Nov 2026.</strong> Roles reported include developer, analyst and cybersecurity. Confirm exact posts and eligibility in the official advertisement.</p>
+            <div class="job-card-bottom"><span class="job-source">Official recruitment notices</span><a href="https://www.psc.gov.np/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Official PSC ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="private" data-location="kathmandu" data-level="experienced" data-search="british council nepal finance officer kathmandu finance operations payroll compliance taxes deadline november 5 2026">
+            <div class="job-card-head"><div class="job-org-icon">🌐</div><div class="job-card-main"><span class="jobs-category">PRIVATE · FINANCE</span><h3>British Council Nepal — Finance Officer</h3><p>Finance operations · Kathmandu</p></div><span class="job-status status-check">Open listing</span></div>
+            <div class="job-meta-row"><span>📍 Kathmandu</span><span>🎯 Finance / accounting</span></div>
+            <p class="job-summary"><strong>Apply by: 5 Nov 2026.</strong> The role supports finance operations, payroll, compliance and reporting. Check the employer page for the full criteria.</p>
+            <div class="job-card-bottom"><span class="job-source">Official employer source</span><a href="https://www.britishcouncil.org.np/about/jobs" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Official vacancy ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="private" data-location="national" data-level="experienced" data-search="world health organization who nepal jobs vacancy salary deadline november 10 2026">
+            <div class="job-card-head"><div class="job-org-icon">🌍</div><div class="job-card-main"><span class="jobs-category">INTERNATIONAL ORGANIZATION</span><h3>WHO Nepal — Current opportunities</h3><p>World Health Organization · Nepal</p></div><span class="job-status status-check">Verify role</span></div>
+            <div class="job-meta-row"><span>📍 Nepal / role-specific</span><span>🎯 Professional roles</span></div>
+            <p class="job-summary">A vacancy listing reported a WHO opportunity with a 10 Nov 2026 deadline. Open the official WHO careers portal and confirm the exact title, location and deadline.</p>
+            <div class="job-card-bottom"><span class="job-source">Official employer portal</span><a href="https://careers.who.int/careersection/ex/jobsearch.ftl" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Official careers ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="government" data-location="lumbini" data-level="exam" data-search="lumbini province government vacancy province lok sewa nepal deadline november 10 2026">
+            <div class="job-card-head"><div class="job-org-icon">🏛️</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · LUMBINI</span><h3>Lumbini Province — Vacancy notice</h3><p>Province Government · recruitment notice</p></div><span class="job-status status-check">Verify notice</span></div>
+            <div class="job-meta-row"><span>📍 Lumbini Province</span><span>🎯 Public service</span></div>
+            <p class="job-summary"><strong>Reported deadline: 10 Nov 2026.</strong> Check the province's official recruitment notice for post names, qualification and application steps.</p>
+            <div class="job-card-bottom"><span class="job-source">Official provincial source</span><a href="https://ppsc.lumbini.gov.np/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Official website ↗</a></div>
+        </article>
+        <article class="job-listing-card job-card" data-category="government" data-location="national" data-level="exam" data-search="lok sewa public service commission government officer assistant technical non technical national vacancy advertisement exam notice">
+            <div class="job-card-head"><div class="job-org-icon">🏛️</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · PUBLIC SERVICE</span><h3>Lok Sewa vacancy notices</h3><p>Public Service Commission · Federal and public institutions</p></div><span class="job-status status-check">Verify status</span></div>
+            <div class="job-meta-row"><span>📍 National / multiple offices</span><span>🎯 Exam / public service</span></div>
+            <p class="job-summary">Explore advertised posts, eligibility requirements, application instructions and exam-related notices published by the Public Service Commission.</p>
+            <div class="job-card-bottom"><span class="job-source">Source: Public Service Commission</span><a href="https://www.psc.gov.np/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">View notice ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="government" data-location="kathmandu" data-level="exam" data-search="teacher service commission tsc teacher education teaching license recruitment promotion vacancy bhaktapur kathmandu valley">
+            <div class="job-card-head"><div class="job-org-icon">👩‍🏫</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · EDUCATION</span><h3>Teacher Service Commission</h3><p>Teacher recruitment and licensing notices</p></div><span class="job-status status-check">Verify status</span></div>
+            <div class="job-meta-row"><span>📍 Sanothimi, Bhaktapur</span><span>🎯 Teaching / exam</span></div>
+            <p class="job-summary">Review teacher recruitment advertisements, license-related notices and application requirements. Check the application list for currently available forms.</p>
+            <div class="job-card-bottom"><span class="job-source">Source: Teacher Service Commission</span><a href="https://online.tsc.gov.np/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">View applications ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="government" data-location="national" data-level="exam" data-search="nepal police recruitment assistant sub inspector office assistant police vacancies national physical test application">
+            <div class="job-card-head"><div class="job-org-icon">👮</div><div class="job-card-main"><span class="jobs-category">GOVERNMENT · SECURITY SERVICE</span><h3>Nepal Police recruitment notices</h3><p>Official recruitment advertisements</p></div><span class="job-status status-check">Verify status</span></div>
+            <div class="job-meta-row"><span>📍 National / multiple offices</span><span>🎯 Recruitment / exam</span></div>
+            <p class="job-summary">Find published recruitment notices, required qualifications, application forms and selection-process information in the official notice list.</p>
+            <div class="job-card-bottom"><span class="job-source">Source: Nepal Police</span><a href="https://www.nepalpolice.gov.np/career/vacancy/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">View notice ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="government" data-location="national" data-level="experienced" data-search="nepal electricity authority nea careers engineer technician administration vacancy national electricity">
+            <div class="job-card-head"><div class="job-org-icon">⚡</div><div class="job-card-main"><span class="jobs-category">PUBLIC ENTERPRISE · ENERGY</span><h3>Nepal Electricity Authority</h3><p>Technical and administrative careers</p></div><span class="job-status status-check">Verify status</span></div>
+            <div class="job-meta-row"><span>📍 National / multiple offices</span><span>🎯 Technical / administration</span></div>
+            <p class="job-summary">Check career announcements for available posts, required education, documents and recruitment schedules.</p>
+            <div class="job-card-bottom"><span class="job-source">Source: Nepal Electricity Authority</span><a href="https://www.nea.org.np/en/careers" target="_blank" rel="noopener noreferrer" class="job-apply-btn">View careers ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="banking" data-location="national" data-level="experienced" data-search="nepal rastra bank banking finance economist assistant officer banking vacancy career notice national">
+            <div class="job-card-head"><div class="job-org-icon">🏦</div><div class="job-card-main"><span class="jobs-category">BANKING · FINANCE</span><h3>Nepal Rastra Bank</h3><p>Central bank career announcements</p></div><span class="job-status status-check">Verify status</span></div>
+            <div class="job-meta-row"><span>📍 National</span><span>🎯 Banking / finance</span></div>
+            <p class="job-summary">Explore recruitment announcements and confirm post-specific qualifications, age requirements and deadlines from the published notice.</p>
+            <div class="job-card-bottom"><span class="job-source">Source: Nepal Rastra Bank</span><a href="https://www.nrb.org.np/" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Explore careers ↗</a></div>
+        </article>
+
+        <article class="job-listing-card job-card" data-category="private" data-location="national" data-level="entry" data-search="private company ngo ingo banking hotel information technology sales marketing jobsnepal vacancy entry level experienced jobs">
+            <div class="job-card-head"><div class="job-org-icon">💼</div><div class="job-card-main"><span class="jobs-category">PRIVATE · MULTI-SECTOR</span><h3>Private-sector opportunities</h3><p>Company, NGO / INGO and business roles</p></div><span class="job-status status-check">Verify status</span></div>
+            <div class="job-meta-row"><span>📍 Various locations</span><span>🎯 Entry to experienced</span></div>
+            <p class="job-summary">Search private-sector listings across different fields. Review the employer, role requirements, salary details and application deadline carefully.</p>
+            <div class="job-card-bottom"><span class="job-source">Listing directory: JobsNepal</span><a href="https://jobsnepal.nepsetrading.com/en" target="_blank" rel="noopener noreferrer" class="job-apply-btn">Explore roles ↗</a></div>
+        </article>
+    </div>
+
+    <p id="noJobsFound" class="empty" hidden>No matching vacancies. Change your search or filters.</p>
+    <div class="jobs-note"><strong>Live data note:</strong> Nepal Sewa checks for updates every 3 minutes. Without a configured vacancy API/backend, refresh only reloads this device’s saved job drafts and the vacancy cards already in this HTML; it cannot fetch new vacancies from government/private websites automatically. Verify every role and deadline at its source. Never share passwords or OTPs.</div>
+</div>
+
+<div class="empty" id="otherPlaceholder">
+    This section is ready for future content.
+</div>
+
+    </main>
+</section>
+
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+    <div class="nav-item active" data-page="home"
+         onclick="showPage('home')">
+        <div>🏠</div>Home
+    </div>
+
+    <div class="nav-item" data-page="alerts"
+         onclick="showPage('alerts')">
+        <div>🔔</div>Alerts
+    </div>
+
+    <div class="nav-item" data-page="jobs"
+         onclick="showPage('jobs')">
+        <div>💼</div>Jobs
+    </div>
+
+    <div class="nav-item" data-page="services"
+         onclick="showPage('services')">
+        <div>⚙️</div>Services
+    </div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  
+const SUPABASE_URL = "https://mmbhlrcbmqjapluwtlbi.supabase.co";
+const SUPABASE_KEY = "sb_publishable_UqenJemBZsHibQ_IAGUTdw_g3-IwGXV";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+</script>
+<script>
+
+const STORAGE_KEY = "nepalSewaNotices_v1";
+let notices = loadNotices();
+let currentFilter = "all";
+let bsYear, bsMonth, bsTodayDate;
+
+const bsMonthNames = [
+  "बैशाख", "जेठ", "असार", "साउन", "भदौ", "असोज",
+  "कात्तिक", "मंसिर", "पुस", "माघ", "फागुन", "चैत"
+];
+
+function loadNotices() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveNotices() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notices));
+    return true;
+  } catch (error) {
+    alert("Notices save garna sakiyena.");
+    return false;
+  }
+}
+
+function showPage(page) { 
+  
+/* ===== SERVICES SEARCH AND FILTER ===== */
+let activeServiceCategory = "all";
+
+function filterServices() {
+    const searchInput = document.getElementById("serviceSearch");
+    const cards = document.querySelectorAll(".premium-service-card");
+    const query = searchInput.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const category = card.dataset.category;
+        const text = card.innerText.toLowerCase();
+
+        const matchesSearch = text.includes(query);
+        const matchesCategory =
+            activeServiceCategory === "all" ||
+            category === activeServiceCategory;
+
+        const show = matchesSearch && matchesCategory;
+
+        card.hidden = !show;
+
+        if (show) visibleCount++;
+    });
+
+    document.getElementById("noServicesFound").hidden =
+        visibleCount !== 0;
+}
+
+function setServiceFilter(category, button) {
+    activeServiceCategory = category;
+
+    document.querySelectorAll(".service-filters button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+    filterServices();
+}
+
+  const home = document.getElementById("homePage");
+  const alerts = document.getElementById("alertsPage");
+  const other = document.getElementById("otherPage");
+  const calendar = document.getElementById("bsCalendarPage");
+  const placeholder = document.getElementById("otherPlaceholder");
+  const servicesContent = document.getElementById("servicesContent");
+  const governmentContent = document.getElementById("governmentContent");
+  const jobsContent = document.getElementById("jobsContent");
+  const newsContent = document.getElementById("newsContent");
+  const title = document.getElementById("otherTitle");
+
+  home.hidden = page !== "home";
+  alerts.hidden = page !== "alerts";
+  other.hidden = page === "home" || page === "alerts";
+
+  const titles = {
+    news: "📰 News",
+    jobs: "💼 Jobs",
+    services: "🛠️ Services",
+    government: "🏛️ Government Services",
+    calendar: "📅 Calendar"
+  };
+
+  if (titles[page]) {
+    title.textContent = titles[page];
+  }
+
+  calendar.hidden = page !== "calendar";
+placeholder.hidden =
+    page === "calendar" || page === "services" || page === "government" || page === "jobs" || page === "news";
+
+servicesContent.hidden = page !== "services";
+governmentContent.hidden = page !== "government";
+  jobsContent.hidden = page !== "jobs";
+  newsContent.hidden = page !== "news";
+  if (page === "news") { renderManualNews(); loadNepalNews(); }
+
+if (page === "jobs") {
+    document.getElementById("jobsSearch").value = "";
+    activeJobCategory = "all";
+    document.querySelectorAll(".jobs-filters button").forEach(btn => btn.classList.remove("active"));
+    document.querySelector(".jobs-filters button").classList.add("active");
+    filterJobs();
+}
+
+if (page === "government") {
+    document.getElementById("governmentSearch").value = "";
+    filterGovernmentServices();
+}
+
+if (page === "services") {
+    activeServiceCategory = "all";
+
+    document.getElementById("serviceSearch").value = "";
+
+    document.querySelectorAll(".service-filters button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    document.querySelector(".service-filters button")
+        .classList.add("active");
+
+    filterServices();
+}
+  document.querySelectorAll(".nav-item").forEach(item => {
+    item.classList.toggle("active", item.dataset.page === page);
+  });
+
+  renderNotices();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (page === "alerts") {
+    loadLiveWeather();
+    loadOfficialAlerts();
+  }
+
+  if (page === "calendar" && !bsTodayDate) {
+    initBSCalendar();
+  }
+}
+
+
+
+/* Employer job form: local draft only until a verified backend is connected */
+function togglePostJobForm(){
+  const panel=document.getElementById('postJobPanel');
+  if(!panel)return;
+  panel.hidden=!panel.hidden;
+  if(!panel.hidden) panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function submitLocalJobPost(event){
+  event.preventDefault();
+  const form=document.getElementById('postJobForm');
+  const message=document.getElementById('postJobMessage');
+  if(!form.reportValidity())return;
+  const item={
+    id:'draft-'+Date.now(),company:document.getElementById('postCompany').value.trim(),contact:document.getElementById('postContact').value.trim(),phone:document.getElementById('postPhone').value.trim(),sector:document.getElementById('postSector').value,title:document.getElementById('postTitle').value.trim(),education:document.getElementById('postEducation').value,experience:document.getElementById('postExperience').value,salary:document.getElementById('postSalary').value.trim(),location:document.getElementById('postLocation').value.trim(),type:document.getElementById('postType').value,deadline:document.getElementById('postDeadline').value,description:document.getElementById('postDescription').value.trim(),savedAt:new Date().toISOString()
+  };
+  try{
+    const key='nepalSewaJobDrafts_v1';
+    const existing=JSON.parse(localStorage.getItem(key)||'[]');
+    existing.unshift(item);
+    localStorage.setItem(key,JSON.stringify(existing.slice(0,50)));
+    message.className='post-job-success';
+    message.textContent='Draft saved on this device and added to your local Jobs preview. It is not public to other users until a secure backend publishes it.';
+    form.reset();
+    renderLocalJobDrafts();
+    filterJobs();
+  }catch(err){
+    message.className='post-job-disclaimer';
+    message.textContent='Could not save the draft in this browser. Please check browser storage settings.';
+  }
+}
+
+/* ===== JOBS AUTO-REFRESH =====
+   Configure window.NEPAL_SEWA_JOBS_API to a trusted JSON API endpoint to fetch
+   live public vacancies. Expected response: [{id,title,company,location,category,
+   salary,deadline,description,url,source,verifiedAt}]. Do not put secret API keys here.
+*/
+const JOB_DRAFT_STORAGE_KEY = 'nepalSewaJobDrafts_v1';
+const JOB_REFRESH_INTERVAL_MS = 180000; // 3 minutes (within the requested 1–5 min)
+let jobsRefreshBusy = false;
+let jobsLastSuccessfulCheck = null;
+
+function safeText(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function renderLocalJobDrafts(){
+  const grid=document.getElementById('jobsGrid');
+  if(!grid)return;
+  grid.querySelectorAll('[data-local-draft="true"]').forEach(node=>node.remove());
+  let drafts=[];
+  try{drafts=JSON.parse(localStorage.getItem(JOB_DRAFT_STORAGE_KEY)||'[]');if(!Array.isArray(drafts))drafts=[];}catch(e){drafts=[];}
+  drafts.forEach(job=>{
+    if(!job || !job.title) return;
+    const card=document.createElement('article');
+    card.className='job-listing-card job-card job-local-draft';
+    card.dataset.localDraft='true';card.dataset.category='private';card.dataset.location='all';card.dataset.level='entry';
+    card.dataset.search=[job.title,job.company,job.location,job.sector,job.education,job.experience].join(' ').toLowerCase();
+    const deadline=job.deadline ? new Date(job.deadline+'T23:59:59') : null;
+    const expired=deadline && !Number.isNaN(deadline.getTime()) && deadline < new Date();
+    card.innerHTML=`<div class="job-card-head"><div class="job-org-icon">🏪</div><div class="job-card-main"><span class="jobs-category">NEPAL SEWA · LOCAL DRAFT</span><h3>${safeText(job.title)}</h3><p>${safeText(job.company||'Local business')} · ${safeText(job.location||'Location not set')}</p></div><span class="job-status status-check">${expired?'Deadline passed':'Draft · this device'}</span></div><div class="job-meta-row"><span>📍 ${safeText(job.location||'Not set')}</span><span>💰 NPR ${safeText(job.salary||'Not stated')}</span><span>🎓 ${safeText(job.education||'Not stated')}</span></div><p class="job-summary">${safeText(job.type||'Job')} · ${safeText(job.experience||'Experience not stated')}${job.deadline?' · Deadline: '+safeText(job.deadline):''}<br>${safeText(job.description||'No extra details provided.')}</p><div class="job-card-bottom"><span class="job-source">Saved locally · not public</span><span class="job-apply-btn" style="background:#64748b">Local draft</span></div>`;
+    grid.prepend(card);
+  });
+}
+function updateJobsRefreshUI(state,message){
+  const dot=document.getElementById('jobsRefreshDot');const status=document.getElementById('jobsRefreshStatus');const last=document.getElementById('jobsLastUpdated');
+  if(dot)dot.className='jobs-refresh-indicator'+(state==='ok'?' ok':state==='error'?' error':'');
+  if(status)status.textContent=message;
+  if(last)last.textContent='Last checked: '+(jobsLastSuccessfulCheck?jobsLastSuccessfulCheck.toLocaleString():'not yet refreshed');
+}
+async function refreshJobsNow(manual=false){
+  if(jobsRefreshBusy)return;
+  jobsRefreshBusy=true;
+  const button=document.getElementById('jobsRefreshButton');if(button){button.disabled=true;button.textContent='↻ Checking…';}
+  try{
+    renderLocalJobDrafts();
+    const endpoint=window.NEPAL_SEWA_JOBS_API;
+    if(endpoint && typeof endpoint==='string'){
+      const response=await fetch(endpoint,{method:'GET',headers:{'Accept':'application/json'},cache:'no-store'});
+      if(!response.ok)throw new Error('Vacancy API returned '+response.status);
+      const payload=await response.json();
+      const list=Array.isArray(payload)?payload:(Array.isArray(payload.jobs)?payload.jobs:null);
+      if(!list)throw new Error('API response must be an array or contain a jobs array');
+      const grid=document.getElementById('jobsGrid');
+      if(grid){
+        grid.querySelectorAll('[data-api-job="true"]').forEach(node=>node.remove());
+        list.forEach(job=>{
+          if(!job || !job.title || !job.url || !/^https:\/\//i.test(job.url))return;
+          const card=document.createElement('article');card.className='job-listing-card job-card';card.dataset.apiJob='true';card.dataset.category=['government','private','banking','student'].includes(String(job.category||'').toLowerCase())?String(job.category).toLowerCase():'private';card.dataset.location=String(job.locationKey||'all').toLowerCase();card.dataset.level=String(job.level||'all').toLowerCase();card.dataset.search=[job.title,job.company,job.location,job.category,job.description].join(' ').toLowerCase();
+          const deadline=job.deadline?new Date(job.deadline):null;const expired=deadline&&!Number.isNaN(deadline.getTime())&&deadline<new Date();
+          card.innerHTML=`<div class="job-card-head"><div class="job-org-icon">💼</div><div class="job-card-main"><span class="jobs-category">${safeText(String(job.category||'VACANCY').toUpperCase())} · LIVE FEED</span><h3>${safeText(job.title)}</h3><p>${safeText(job.company||job.source||'Employer')} · ${safeText(job.location||'Nepal')}</p></div><span class="job-status status-check">${expired?'Deadline passed':job.verified?'Verified source':'Check source'}</span></div><div class="job-meta-row"><span>📍 ${safeText(job.location||'Nepal')}</span><span>💰 ${safeText(job.salary||'Salary not stated')}</span>${job.deadline?`<span>🗓️ Deadline ${safeText(job.deadline)}</span>`:''}</div><p class="job-summary">${safeText(job.description||'Open the source for the full vacancy notice, eligibility and application process.')}</p><div class="job-card-bottom"><span class="job-source">${safeText(job.source||'API feed')}${job.verifiedAt?' · Checked '+safeText(job.verifiedAt):''}</span><a class="job-apply-btn" href="${safeText(job.url)}" target="_blank" rel="noopener noreferrer">View / Apply ↗</a></div>`;
+          grid.prepend(card);
+        });
+      }
+      jobsLastSuccessfulCheck=new Date();updateJobsRefreshUI('ok','Live vacancy feed refreshed. Confirm each deadline on the employer’s source.');
+    }else{
+      jobsLastSuccessfulCheck=new Date();
+      updateJobsRefreshUI('','Local refresh complete. No live API configured, so official vacancy cards are not being fetched automatically.');
+    }
+  }catch(error){
+    updateJobsRefreshUI('error','Could not reach the live vacancy feed. Showing the last available cards; try again later.');
+    console.warn('Nepal Sewa jobs refresh:',error);
+  }finally{
+    filterJobs();jobsRefreshBusy=false;
+    if(button){button.disabled=false;button.textContent='↻ Refresh now';}
+  }
+}
+
+/* ===== JOBS SEARCH AND FILTER ===== */
+let activeJobCategory = "all";
+
+function filterJobs() {
+    const searchInput = document.getElementById("jobsSearch");
+    const locationInput = document.getElementById("jobsLocation");
+    const levelInput = document.getElementById("jobsLevel");
+    const cards = document.querySelectorAll("#jobsGrid .job-card");
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+    const location = locationInput ? locationInput.value : "all";
+    const level = levelInput ? levelInput.value : "all";
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const searchable = ((card.dataset.search || "") + " " + card.innerText).toLowerCase();
+        const category = card.dataset.category || "";
+        const cardLocation = card.dataset.location || "all";
+        const cardLevel = card.dataset.level || "all";
+        const matchesSearch = searchable.includes(query);
+        const matchesCategory = activeJobCategory === "all" || category === activeJobCategory;
+        const matchesLocation = location === "all" || cardLocation === location || cardLocation === "all";
+        const matchesLevel = level === "all" || cardLevel === level || cardLevel === "all";
+        const show = matchesSearch && matchesCategory && matchesLocation && matchesLevel;
+        card.hidden = !show;
+        if (show) visibleCount++;
+    });
+
+    const empty = document.getElementById("noJobsFound");
+    if (empty) empty.hidden = visibleCount !== 0;
+    const resultCount = document.getElementById("jobsResultsCount");
+    if (resultCount) resultCount.textContent = visibleCount + (visibleCount === 1 ? " result" : " results");
+    const topCount = document.getElementById("jobsVisibleCount");
+    if (topCount) topCount.textContent = visibleCount;
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderLocalJobDrafts();
+  refreshJobsNow(false);
+  window.setInterval(()=>refreshJobsNow(false),JOB_REFRESH_INTERVAL_MS);
+});
+
+function setJobFilter(category, button) {
+    activeJobCategory = category;
+    document.querySelectorAll(".jobs-filters button").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    filterJobs();
+}
+
+function filterGovernmentServices() {
+  const input = document.getElementById("governmentSearch");
+  const cards = document.querySelectorAll("#governmentServiceGrid .premium-service-card");
+  const query = input.value.toLowerCase().trim();
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const matches = card.innerText.toLowerCase().includes(query);
+    card.hidden = !matches;
+    if (matches) visibleCount++;
+  });
+
+  document.getElementById("noGovernmentServices").hidden = visibleCount !== 0;
+}
+
+function setFilter(filter, button) {
+  currentFilter = filter;
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+  renderNotices();
+}
+
+function addNotice() {
+  const title = document.getElementById("noticeTitle").value.trim();
+  const message = document.getElementById("noticeMessage").value.trim();
+  const category = document.getElementById("noticeCategory").value;
+
+  if (!title || !message) {
+    alert("Title ra message dubai lekha.");
+    return;
+  }
+
+  notices.unshift({
+    id: Date.now().toString() + Math.random().toString(36).slice(2),
+    title,
+    message,
+    category,
+    date: new Date().toLocaleString(),
+    read: false
+  });
+
+  if (!saveNotices()) {
+    notices.shift();
+    return;
+  }
+
+  document.getElementById("noticeTitle").value = "";
+  document.getElementById("noticeMessage").value = "";
+  renderNotices();
+  alert("Notice save bhayo!");
+}
+
+function markRead(id) {
+  const item = notices.find(n => n.id === id);
+  if (!item) return;
+
+  item.read = true;
+  saveNotices();
+  renderNotices();
+}
+
+function deleteNotice(id) {
+  if (!confirm("Yo notice delete garne?")) return;
+
+  const oldNotices = notices;
+  notices = notices.filter(n => n.id !== id);
+
+  if (!saveNotices()) {
+    notices = oldNotices;
+    return;
+  }
+
+  renderNotices();
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function makeCard(n) {
+  const icons = {
+    emergency: "🚨",
+    weather: "🌦️",
+    notices: "📢"
+  };
+
+  const labels = {
+    emergency: "EMERGENCY",
+    weather: "WEATHER",
+    notices: "PUBLIC NOTICE"
+  };
+
+  const priorities = {
+    emergency: '<span class="priority high">High</span>',
+    weather: '<span class="priority medium">Weather</span>',
+    notices: '<span class="priority">Notice</span>'
+  };
+
+  return `
+    <article class="alert-card">
+      <div class="card-heading">
+        <div class="card-title">
+          <span class="card-icon">${icons[n.category] || "📢"}</span>
+          <h3>${escapeHTML(n.title)}</h3>
+        </div>
+        ${priorities[n.category] || priorities.notices}
+      </div>
+      <div class="card-subtitle">
+        ${labels[n.category] || "PUBLIC NOTICE"} · ${n.read ? "Read" : "Unread"}
+      </div>
+      <p class="card-message">${escapeHTML(n.message)}</p>
+      <small class="card-date">📅 ${escapeHTML(n.date || "")}</small>
+      <div class="card-actions">
+        ${n.read ? "" : `<button class="small-btn" onclick="markRead('${n.id}')">✓ Mark as Read</button>`}
+        <button class="small-btn delete-btn" onclick="deleteNotice('${n.id}')">🗑️ Delete</button>
+      </div>
+    </article>`;
+}
+
+function renderNotices() {
+  const counter = document.getElementById("counter");
+  const list = document.getElementById("alertList");
+  const homeAlerts = document.getElementById("homeAlerts");
+
+  if (!counter || !list || !homeAlerts) return;
+
+  const unread = notices.filter(n => !n.read).length;
+  counter.textContent = unread > 99 ? "99+" : unread;
+
+  const filtered = notices.filter(n =>
+    currentFilter === "all" || n.category === currentFilter
+  );
+
+  list.innerHTML = filtered.length
+    ? filtered.map(makeCard).join("")
+    : '<div class="empty">🔔<br>No alerts in this category.</div>';
+
+  homeAlerts.innerHTML = notices.length
+    ? notices.slice(0, 3).map(makeCard).join("") +
+      '<button class="save-btn" onclick="showPage(\'alerts\')">View All Alerts →</button>'
+    : '<div class="empty">No saved notices yet. Open Alerts to add one.</div>';
+}
+
+window.addEventListener("storage", event => {
+  if (event.key === STORAGE_KEY) {
+    notices = loadNotices();
+    renderNotices();
+  }
+});
+
+// WEATHER
+const weatherLocations = {
+  Kathmandu: [27.7172, 85.3240],
+  Lalitpur: [27.6588, 85.3247],
+  Bhaktapur: [27.6710, 85.4298],
+  Banke: [28.05, 81.6167],
+  Bardiya: [28.3, 81.35],
+  Dang: [28.05, 82.4833],
+  Kailali: [28.7, 80.6],
+  Kaski: [28.2096, 83.9856],
+  Chitwan: [27.5291, 84.3542],
+  Jhapa: [26.5455, 88.0945],
+  Morang: [26.65, 87.4667],
+  Rupandehi: [27.5, 83.45]
+};
+
+function weatherDescription(code) {
+  if (code === 0) return "Clear sky ☀️";
+  if ([1, 2, 3].includes(code)) return "Cloudy ☁️";
+  if ([45, 48].includes(code)) return "Foggy 🌫️";
+  if ([51, 53, 55, 56, 57].includes(code)) return "Drizzle 🌦️";
+  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "Rain 🌧️";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "Snow 🌨️";
+  if ([95, 96, 99].includes(code)) return "Thunderstorm ⛈️";
+  return "Weather unavailable";
+}
+
+async function loadLiveWeather() {
+  const status = document.getElementById("weatherStatus");
+  const details = document.getElementById("weatherDetails");
+  const updated = document.getElementById("weatherUpdated");
+  const district = document.getElementById("district").value;
+
+  if (!district || !weatherLocations[district]) {
+    status.textContent = "Home page ma district select gara.";
+    details.textContent = "";
+    updated.textContent = "";
+    return;
+  }
+
+  status.textContent = "Weather load hudai chha...";
+  details.textContent = "";
+
+  try {
+    const [lat, lon] = weatherLocations[district];
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,precipitation,weather_code,wind_speed_10m&hourly=precipitation_probability&forecast_days=1&timezone=Asia%2FKathmandu`;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Weather request failed");
+
+    const data = await response.json();
+    const c = data.current;
+    const now = Date.parse(c.time);
+    let rainChance = 0;
+
+    data.hourly.time.forEach((time, i) => {
+      const t = Date.parse(time);
+      if (t >= now && t <= now + 6 * 3600000) {
+        rainChance = Math.max(rainChance, data.hourly.precipitation_probability[i] || 0);
+      }
+    });
+
+    status.textContent = `📍 ${district} — ${weatherDescription(c.weather_code)}`;
+    details.innerHTML = `
+      <p>🌡️ Temperature: ${c.temperature_2m} °C</p>
+      <p>🌧️ Precipitation: ${c.precipitation} mm</p>
+      <p>💨 Wind: ${c.wind_speed_10m} km/h</p>
+      <p>☔ Rain chance in next 6 hours: ${rainChance}%</p>`;
+
+    updated.textContent = "Data time: " + c.time.replace("T", " ") +
+      ". Forecast information is not an official warning.";
+  } catch (error) {
+    status.textContent = "Weather load bhayena. Internet check gara.";
+    details.textContent = "";
+    updated.textContent = "";
+  }
+}
+
+document.getElementById("district").addEventListener("change", () => {
+  if (!document.getElementById("alertsPage").hidden) loadLiveWeather();
+});
+
+setInterval(() => {
+  if (!document.getElementById("alertsPage").hidden) loadLiveWeather();
+}, 300000);
+
+// OFFICIAL REAL-TIME ALERT FEED — BIPAD (Government of Nepal)
+const OFFICIAL_ALERTS_API = "https://bipadportal.gov.np/api/v1/alert/";
+let officialAlertLoading = false;
+let lastOfficialAlertIds = new Set();
+
+function pickAlertValue(obj, keys) {
+  for (const key of keys) {
+    const value = obj && obj[key];
+    if (value !== undefined && value !== null && value !== "") {
+      if (typeof value === "object") return value.name || value.title || value.label || value.en || "";
+      return value;
+    }
+  }
+  return "";
+}
+
+function getAlertRecords(payload) {
+  if (Array.isArray(payload)) return payload;
+  for (const key of ["results", "data", "alerts", "records", "items"]) {
+    if (Array.isArray(payload && payload[key])) return payload[key];
+    if (payload && payload[key] && Array.isArray(payload[key].results)) return payload[key].results;
+  }
+  return [];
+}
+
+function alertDate(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString();
+}
+
+async function loadOfficialAlerts(manual = false) {
+  const status = document.getElementById("officialAlertStatus");
+  const checked = document.getElementById("officialAlertChecked");
+  const container = document.getElementById("officialAlerts");
+  if (!status || !container || officialAlertLoading) return;
+  officialAlertLoading = true;
+  status.textContent = "Checking official BIPAD alerts...";
+  if (manual) container.innerHTML = '<p class="feed-loading">Updating live alerts...</p>';
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(OFFICIAL_ALERTS_API, {
+      method: "GET",
+      headers: { "Accept": "application/json" },
+      cache: "no-store",
+      signal: controller.signal
+    });
+    if (!response.ok) throw new Error("BIPAD returned HTTP " + response.status);
+    const payload = await response.json();
+    const alerts = getAlertRecords(payload);
+    if (!alerts.length) {
+      container.innerHTML = '<div class="feed-empty"><strong>No active public alerts returned.</strong><p>BIPAD did not provide any alert records in this update. Check the official portal for the latest situation.</p></div>';
+      status.textContent = "Connected to BIPAD • No alert records returned";
+      if (checked) checked.textContent = "Last checked: " + new Date().toLocaleString();
+      return;
+    }
+
+    const sorted = [...alerts].sort((a, b) => {
+      const da = new Date(pickAlertValue(a, ["started_on", "created_at", "created_on", "updated_at", "issued_at"])).getTime() || 0;
+      const db = new Date(pickAlertValue(b, ["started_on", "created_at", "created_on", "updated_at", "issued_at"])).getTime() || 0;
+      return db - da;
+    });
+    const fragment = document.createDocumentFragment();
+    const newIds = new Set();
+    sorted.slice(0, 25).forEach((item, index) => {
+      const id = String(pickAlertValue(item, ["id", "uuid", "alert_id"]) || (pickAlertValue(item, ["title", "name"]) + "-" + index));
+      newIds.add(id);
+      const title = pickAlertValue(item, ["title", "name", "headline", "hazard_name", "hazard"]) || "Official disaster alert";
+      const hazard = pickAlertValue(item, ["hazard_name", "hazard", "hazard_type", "type"]);
+      const source = pickAlertValue(item, ["source_name", "source", "organization_name", "organization"]) || "BIPAD Portal";
+      const location = [
+        pickAlertValue(item, ["province_name", "province"]),
+        pickAlertValue(item, ["district_name", "district"]),
+        pickAlertValue(item, ["municipality_name", "municipality"])
+      ].filter(Boolean).join(", ") || pickAlertValue(item, ["location", "address"]);
+      const started = alertDate(pickAlertValue(item, ["started_on", "start_date", "created_at", "created_on", "issued_at"]));
+      const expires = alertDate(pickAlertValue(item, ["expire_on", "expires_at", "end_date", "expiry_date"]));
+      const verified = pickAlertValue(item, ["verified", "is_verified"]);
+      const isPublic = pickAlertValue(item, ["public", "is_public"]);
+      const description = pickAlertValue(item, ["description", "message", "summary", "detail"]);
+
+      const card = document.createElement("article");
+      card.className = "alert-card official-live-card";
+      const top = document.createElement("div");
+      top.className = "official-alert-top";
+      const heading = document.createElement("h3");
+      heading.textContent = "⚠️ " + title;
+      const badge = document.createElement("span");
+      badge.className = "official-badge" + (verified === true || verified === "true" ? " verified" : "");
+      badge.textContent = verified === true || verified === "true" ? "✓ Verified" : "Official feed";
+      top.append(heading, badge);
+      card.appendChild(top);
+      if (description) { const p=document.createElement("p"); p.className="card-message"; p.textContent=description; card.appendChild(p); }
+      const meta = document.createElement("div"); meta.className="official-alert-meta";
+      [["📍", location], ["Hazard", hazard], ["Source", source], ["Issued", started], ["Expires", expires]].forEach(([label, value]) => {
+        if (!value) return;
+        const line=document.createElement("p");
+        line.textContent = label === "📍" ? label + " " + value : label + ": " + value;
+        meta.appendChild(line);
+      });
+      if (isPublic === false || isPublic === "false") {
+        const note=document.createElement("p"); note.className="feed-note"; note.textContent="This record is marked non-public by the source."; meta.appendChild(note);
+      }
+      card.appendChild(meta);
+      const link=document.createElement("a");
+      link.href="https://bipadportal.gov.np/realtime"; link.target="_blank"; link.rel="noopener noreferrer";
+      link.className="official-source-link"; link.textContent="View on official BIPAD portal ↗";
+      card.appendChild(link);
+      fragment.appendChild(card);
+    });
+
+    container.replaceChildren(fragment);
+    status.textContent = "LIVE FEED CONNECTED • " + Math.min(sorted.length, 25) + " alert record(s)";
+    if (checked) checked.textContent = "Last checked: " + new Date().toLocaleString() + " • Auto-refresh every 2 minutes";
+    lastOfficialAlertIds = newIds;
+  } catch (error) {
+    console.error("BIPAD official alert feed error:", error);
+    status.textContent = "Live feed unavailable • " + (error.name === "AbortError" ? "Request timed out" : "Connection/API issue");
+    container.innerHTML = '<div class="feed-empty"><strong>Could not load live alerts right now.</strong><p>This is a connection or official API availability issue. No sample or fake alerts are shown. Please open the official BIPAD portal or DHM warning page.</p><p><a href="https://bipadportal.gov.np/realtime" target="_blank" rel="noopener noreferrer">Open BIPAD live portal ↗</a></p></div>';
+    if (checked) checked.textContent = "Last attempt: " + new Date().toLocaleString();
+  } finally {
+    clearTimeout(timeout);
+    officialAlertLoading = false;
+  }
+}
+
+// Refresh while the Alerts page is open; a manual refresh button is also available.
+setInterval(() => {
+  const page = document.getElementById("alertsPage");
+  if (page && !page.hidden) loadOfficialAlerts(false);
+}, 120000);
+
+// BROWSER NOTIFICATIONS
+async function enableBrowserNotifications() {
+  const status = document.getElementById("notificationStatus");
+
+  if (!("Notification" in window)) {
+    status.textContent = "Yo browser ma notifications supported chhaina.";
+    return;
+  }
+
+  try {
+    const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      status.textContent = "Browser notification permission diyena.";
+      return;
+    }
+
+    status.textContent = "Permission enabled. Background push ko lagi hosted service chahinchha.";
+    new Notification("Nepal Sewa", {
+      body: "Browser notification enabled."
+    });
+  } catch (error) {
+    status.textContent = "Notifications ko lagi HTTPS wa localhost use gara.";
+  }
+}
+
+// BS CALENDAR
+function getNepaliDateClass() {
+  const lib = window.NepaliDateConverter || window.NepaliDate;
+  if (!lib) return null;
+  return lib.NepaliDate || lib.default || lib;
+}
+async function loadSupabaseNotices() {
+  const { data, error } = await supabaseClient
+    .from("notices")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Supabase notices load error:", error.message);
+    return;
+  }
+
+  notices = (data || []).map(n => ({
+    id: String(n.id),
+    title: n.title,
+    message: n.message,
+    category: n.category,
+    date: n.created_at
+      ? new Date(n.created_at).toLocaleString()
+      : "",
+    read: false
+  }));
+
+  renderNotices();
+}
+
+function initBSCalendar() {
+  const DateClass = getNepaliDateClass();
+  const today = document.getElementById("bsToday");
+
+  if (!DateClass) {
+    today.textContent = "Date library load bhayena. Internet check gara.";
+    return;
+  }
+
+  try {
+    bsTodayDate = new DateClass();
+    bsYear = bsTodayDate.getYear();
+    bsMonth = bsTodayDate.getMonth();
+
+    today.textContent = "Aajako Nepali miti: " +
+      bsTodayDate.format("YYYY MMMM DD");
+
+    renderBSCalendar();
+  } catch (error) {
+    today.textContent = "Calendar load error: " + error.message;
+    console.error("Calendar error:", error);
+  }
+}
+
+// Public festivals/holidays for BS 2083. Dates based on published Nepal calendars;
+// some observances can vary by region/community.
+const bsFestivalMap = {
+  "2083-0-1": "Nepali New Year",
+  "2083-0-18": "Buddha Jayanti / Labour Day / Ubhauli",
+  "2083-1-15": "Republic Day",
+  "2083-4-12": "Janai Purnima / Raksha Bandhan",
+  "2083-4-13": "Gai Jatra",
+  "2083-4-19": "Krishna Janmashtami / Gaura Parva",
+  "2083-4-29": "Haritalika Teej",
+  "2083-5-3": "Constitution Day",
+  "2083-5-9": "Indra Jatra",
+  "2083-5-18": "Jitiya Parwa",
+  "2083-5-25": "Ghatasthapana",
+  "2083-6-3": "Maha Ashtami / Dashain",
+  "2083-6-4": "Vijaya Dashami",
+  "2083-6-5": "Dashain holiday",
+  "2083-6-6": "Dashain holiday",
+  "2083-6-7": "Dashain holiday",
+  "2083-6-8": "Dashain holiday",
+  "2083-6-9": "Dashain holiday",
+  "2083-6-10": "Dashain holiday",
+  "2083-6-22": "Kukur Tihar / Laxmi Puja",
+  "2083-6-23": "Gai Tihar",
+  "2083-6-24": "Govardhan Puja / Mha Puja",
+  "2083-6-25": "Bhai Tika",
+  "2083-6-29": "Chhath Parva",
+  "2083-8-1": "Maghe Sankranti",
+  "2083-10-7": "Democracy Day",
+  "2083-11-8": "Holi / Fagu Purnima (date may vary by region)"
+};
+
+function getEnglishDateForBS(dateObj) {
+  try {
+    if (dateObj && typeof dateObj.toJsDate === "function") {
+      const d = dateObj.toJsDate();
+      if (d instanceof Date && !Number.isNaN(d.getTime())) return d;
+    }
+    if (dateObj && typeof dateObj.toAD === "function") {
+      const ad = dateObj.toAD();
+      const d = ad instanceof Date ? ad : new Date(ad);
+      if (!Number.isNaN(d.getTime())) return d;
+    }
+  } catch (e) {}
+  return null;
+}
+
+function renderBSCalendar() {
+  const title = document.getElementById("bsMonthTitle");
+  const daysBox = document.getElementById("bsDays");
+  const DateClass = getNepaliDateClass();
+  const details = document.getElementById("bsFestivalDetails");
+
+  if (!title || !daysBox || !DateClass || bsYear == null || bsMonth == null) return;
+
+  title.textContent = bsMonthNames[bsMonth] + " " + bsYear;
+  daysBox.replaceChildren();
+
+  try {
+    const firstDay = new DateClass(bsYear, bsMonth, 1);
+    const startDay = firstDay.getDay();
+    let daysInMonth = 0;
+
+    for (let day = 1; day <= 32; day++) {
+      const testDate = new DateClass(bsYear, bsMonth, day);
+      if (testDate.getYear() !== bsYear || testDate.getMonth() !== bsMonth) break;
+      daysInMonth = day;
+    }
+
+    for (let i = 0; i < startDay; i++) {
+      const blank = document.createElement("div");
+      blank.className = "bs-day empty";
+      daysBox.appendChild(blank);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = "bs-day";
+      cell.setAttribute("aria-label", bsMonthNames[bsMonth] + " " + day + ", " + bsYear);
+
+      const bsNumber = document.createElement("span");
+      bsNumber.textContent = day;
+      cell.appendChild(bsNumber);
+
+      const thisDate = new DateClass(bsYear, bsMonth, day);
+      const englishDate = getEnglishDateForBS(thisDate);
+      const adLabel = document.createElement("small");
+      adLabel.className = "ad-date";
+      adLabel.textContent = englishDate
+        ? englishDate.toLocaleDateString("en-GB", { day: "numeric", month: "short" })
+        : "";
+      cell.appendChild(adLabel);
+
+      const festivalKey = `${bsYear}-${bsMonth}-${day}`;
+      const festival = bsFestivalMap[festivalKey];
+      if (festival) {
+        cell.classList.add("festival");
+        cell.title = festival;
+        cell.setAttribute("aria-label", `${bsMonthNames[bsMonth]} ${day}: ${festival}`);
+      }
+
+      if (bsTodayDate &&
+          bsYear === bsTodayDate.getYear() &&
+          bsMonth === bsTodayDate.getMonth() &&
+          day === bsTodayDate.getDate()) {
+        cell.classList.add("today");
+      }
+
+      cell.addEventListener("click", () => {
+        if (!details) return;
+        const adFull = englishDate
+          ? englishDate.toLocaleDateString("en-GB", { weekday:"long", day:"numeric", month:"long", year:"numeric" })
+          : "English date unavailable";
+        details.innerHTML = `<strong>${bsMonthNames[bsMonth]} ${day}, ${bsYear}</strong> · ${adFull}` +
+          (festival ? `<br><strong>🎉 ${festival}</strong>` : "<br>No major festival listed for this date.");
+      });
+      daysBox.appendChild(cell);
+    }
+
+    if (details) {
+      const currentDay = bsTodayDate ? bsTodayDate.getDate() : null;
+      const currentKey = currentDay == null ? "" : `${bsYear}-${bsMonth}-${currentDay}`;
+      const currentFestival = bsFestivalMap[currentKey];
+      const adToday = bsTodayDate ? getEnglishDateForBS(bsTodayDate) : null;
+      details.innerHTML = bsTodayDate && bsYear === bsTodayDate.getYear() && bsMonth === bsTodayDate.getMonth()
+        ? `<strong>Today:</strong> ${bsMonthNames[bsMonth]} ${currentDay}, ${bsYear}` +
+          (adToday ? ` · ${adToday.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}` : "") +
+          (currentFestival ? `<br><strong>🎉 ${currentFestival}</strong>` : "")
+        : "Tap a date to see its English date and festival.";
+    }
+
+    if (!daysInMonth) title.textContent = "Calendar date load bhayena";
+  } catch (error) {
+    title.textContent = "Calendar error";
+    console.error("Calendar render error:", error);
+  }
+}
+
+function changeBSMonth(amount) {
+  if (bsYear == null || bsMonth == null) return;
+
+  bsMonth += amount;
+
+  if (bsMonth < 0) {
+    bsMonth = 11;
+    bsYear--;
+  } else if (bsMonth > 11) {
+    bsMonth = 0;
+    bsYear++;
+  }
+
+  renderBSCalendar();
+}
+
+function goBSToday() {
+  if (!bsTodayDate) { 
+    
+    initBSCalendar();
+    return;
+  }
+
+  bsYear = bsTodayDate.getYear();
+  bsMonth = bsTodayDate.getMonth();
+  renderBSCalendar();
+}
+
+// BIPAD LIVE DISASTER INCIDENTS
+async function loadBipadDisasters() {
+  const container = document.getElementById("bipadDisasters");
+  const status = document.getElementById("bipadStatus");
+
+  if (!container) return;
+  container.replaceChildren();
+  const loading = document.createElement("p");
+  loading.textContent = "Loading disaster reports from BIPAD...";
+  container.appendChild(loading);
+  if (status) status.textContent = "Connecting to BIPAD Portal...";
+
+  try {
+    const response = await fetch("https://bipadportal.gov.np/api/v1/incident/");
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const payload = await response.json();
+    const records = Array.isArray(payload) ? payload :
+      payload.results || payload.data || payload.incidents || [];
+
+    container.replaceChildren();
+    if (!Array.isArray(records) || records.length === 0) {
+      const empty = document.createElement("p");
+      empty.textContent = "BIPAD did not return incident records. Please check the official portal.";
+      container.appendChild(empty);
+      if (status) status.textContent = "No incident records returned.";
+      return;
+    }
+
+    records.slice(0, 10).forEach(item => {
+      const card = document.createElement("article");
+      card.className = "alert-card";
+      card.style.cssText = "background:#eef2f8;color:#172033;padding:14px;margin:10px 0;border-radius:12px;border-left:5px solid #2865bc;";
+
+      const heading = document.createElement("h3");
+      heading.textContent = "🇳🇵 " + (
+        item.title || item.event || item.hazard_name || item.incident_type || item.type || "Reported incident"
+      );
+
+      const details = document.createElement("p");
+      details.className = "card-message";
+      const location = [
+        item.province_name || item.province || "",
+        item.district_name || item.district || "",
+        item.municipality_name || item.municipality || ""
+      ].filter(Boolean).join(", ");
+      const date = item.incident_on || item.incident_date || item.created_at || item.created_on || item.updated_at || "";
+      details.textContent = [location ? "Location: " + location : "", date ? "Date: " + date : ""]
+        .filter(Boolean).join(" • ") || "See the official BIPAD source for full details.";
+
+      card.append(heading, details);
+      container.appendChild(card);
+    });
+    if (status) status.textContent = "Source: BIPAD Portal • Checked: " + new Date().toLocaleString();
+  } catch (error) {
+    console.error("BIPAD incident API error:", error);
+    container.replaceChildren();
+    const message = document.createElement("p");
+    message.textContent = "Live disaster records could not load in this browser. The API may be unavailable or block direct browser requests. Check the official BIPAD Portal link below.";
+    container.appendChild(message);
+    if (status) status.textContent = "Connection failed • " + new Date().toLocaleTimeString();
+  }
+}
+
+// Refresh incident data every 5 minutes.
+setInterval(loadBipadDisasters, 300000);
+
+
+
+/* ===== NEWS FEED + LOCAL COMMUNITY POSTS ===== */
+const NEWS_STORAGE_KEY = "nepalSewaManualNews_v1";
+function readManualNews(){
+  try{const data=JSON.parse(localStorage.getItem(NEWS_STORAGE_KEY)||"[]");return Array.isArray(data)?data:[];}catch(e){return [];}
+}
+function safeNewsText(value){return String(value||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
+function safeNewsUrl(value){try{const u=new URL(value,location.href);return u.protocol==="https:"?u.href:"";}catch(e){return "";}}
+function createNewsCard(item, isManual=false){
+  const card=document.createElement("article");card.className="news-card";
+  const img=document.createElement("img");img.className="news-thumb";img.alt="News image";img.src=safeNewsUrl(item.image)||"";img.onerror=()=>{img.removeAttribute("src");img.style.display="none";};
+  const body=document.createElement("div");
+  const meta=document.createElement("div");meta.className="news-meta";meta.textContent=[item.category||"News",item.source||"Publisher",item.date||""].filter(Boolean).join(" · ");
+  const heading=document.createElement("h4");heading.textContent=item.title||"News update";
+  const summary=document.createElement("p");summary.textContent=item.summary||"Open the publisher link for more details.";
+  body.append(meta,heading,summary);
+  const link=safeNewsUrl(item.link);
+  if(link){const a=document.createElement("a");a.className="news-link";a.href=link;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Read original story ↗";body.append(a);}
+  if(isManual){const del=document.createElement("button");del.type="button";del.className="news-btn secondary";del.style.marginTop="8px";del.textContent="Delete post";del.addEventListener("click",()=>deleteManualNews(item.id));body.append(del);}
+  if(img.src)card.append(img);card.append(body);return card;
+}
+function renderManualNews(){
+  const box=document.getElementById("manualNewsList");if(!box)return;box.replaceChildren();
+  const items=readManualNews();if(!items.length){const empty=document.createElement("div");empty.className="news-empty";empty.textContent="No local posts yet.";box.append(empty);return;}
+  items.forEach(item=>box.append(createNewsCard(item,true)));
+}
+function deleteManualNews(id){const next=readManualNews().filter(item=>item.id!==id);localStorage.setItem(NEWS_STORAGE_KEY,JSON.stringify(next));renderManualNews();}
+document.getElementById("manualNewsForm").addEventListener("submit",function(event){
+  event.preventDefault();
+  const image=document.getElementById("manualNewsImage").value.trim();const link=document.getElementById("manualNewsLink").value.trim();
+  if(image&&!safeNewsUrl(image)){document.getElementById("manualNewsMessage").textContent="Image URL must begin with https://";return;}
+  if(link&&!safeNewsUrl(link)){document.getElementById("manualNewsMessage").textContent="News link must begin with https://";return;}
+  const item={id:String(Date.now()),title:document.getElementById("manualNewsTitle").value.trim(),category:document.getElementById("manualNewsCategory").value,summary:document.getElementById("manualNewsSummary").value.trim(),image,source:document.getElementById("manualNewsSource").value.trim(),link,date:new Date().toLocaleString()};
+  const items=readManualNews();items.unshift(item);
+  try{localStorage.setItem(NEWS_STORAGE_KEY,JSON.stringify(items));this.reset();document.getElementById("manualNewsMessage").textContent="Saved on this browser only.";renderManualNews();}
+  catch(error){document.getElementById("manualNewsMessage").textContent="Could not save. Browser storage may be full.";}
+});
+async function loadNepalNews(){
+  const status=document.getElementById("newsStatus"),box=document.getElementById("autoNewsList");if(!status||!box)return;
+  status.textContent="Fetching latest headlines…";box.replaceChildren();
+  const rss="https://news.google.com/rss/search?q=Nepal&hl=en-US&gl=US&ceid=US:en";
+  const endpoint="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(rss);
+  try{
+    const response=await fetch(endpoint,{cache:"no-store"});if(!response.ok)throw new Error("Feed request failed");
+    const payload=await response.json();if(payload.status!=="ok"||!Array.isArray(payload.items))throw new Error("No news items");
+    const items=payload.items.slice(0,12);if(!items.length)throw new Error("No headlines found");
+    items.forEach(item=>{
+      const raw=item.thumbnail||(item.enclosure&&item.enclosure.link)||"";
+      box.append(createNewsCard({title:item.title,summary:(item.description||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,220),source:item.author||"Google News source",date:item.pubDate?new Date(item.pubDate).toLocaleDateString():"",link:item.link,image:raw,category:"Nepal"}));
+    });
+    status.textContent="Loaded "+items.length+" headlines · Checked "+new Date().toLocaleTimeString()+". Verify details with the original publisher.";
+  }catch(error){
+    const msg=document.createElement("div");msg.className="news-empty";msg.textContent="Automatic news feed could not load right now. Internet, RSS service or browser restrictions may be the reason. Try Refresh news later.";box.append(msg);status.textContent="News feed unavailable · "+new Date().toLocaleTimeString();console.warn("Nepal Sewa news feed:",error);
+  }
+}
+setInterval(()=>{const panel=document.getElementById("newsContent");if(panel&&!panel.hidden)loadNepalNews();},300000);
+
+/* ===== ENGLISH / NEPALI LANGUAGE SWITCH =====
+   Google Translate translates the complete interface separately into Nepali.
+   Original content remains English; choose English to switch back. */
+function googleTranslateElementInit(){
+  if(window.google && google.translate){
+    new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'en,ne',autoDisplay:false,layout:google.translate.TranslateElement.InlineLayout.SIMPLE},'google_translate_element');
+  }
+}
+(function loadGoogleTranslate(){
+  const script=document.createElement('script');
+  script.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  script.onerror=()=>{const el=document.getElementById('google_translate_element');if(el)el.textContent='Language switch needs internet';};
+  document.head.appendChild(script);
+})();
+
+renderNotices();
+initBSCalendar();
+loadSupabaseNotices();
+loadBipadDisasters();
+
+</script>
+</body>
+</html>
